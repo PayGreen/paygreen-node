@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { IConfig, IIdentity } from './interfaces';
+=======
+import { IConfig, IIdentity, IKey } from './interfaces';
+>>>>>>> refacto: Use of index in imports
 import { Host, Mode } from './enums';
 
 /** The Sdk Main Class to make APIPayGreen Calls. */
