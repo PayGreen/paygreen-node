@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { IIdentity } from './interfaces';
+=======
+import { IIdentity, IKey } from './interfaces';
+>>>>>>> refacto: Use of index in imports
 import axios from 'axios';
 
 /**
