@@ -1,4 +1,4 @@
-import { Mode } from '../enums';
+import { Mode } from '../enums/Mode';
 export interface IConfig {
     shopId?: string | null;
     privateKey?: string | null;
