@@ -1,16 +1,10 @@
-import { IIdentity } from './interfaces/IIdentity';
-import { IKey } from './interfaces/IKey';
-import { IConfig } from './interfaces/IConfig';
-import { Mode } from './enums/Mode';
-import { Host } from './enums/Host';
+import { IConfig, IIdentity } from './interfaces';
+import { Host, Mode } from './enums';
 
 /** The Sdk Main Class to make APIPayGreen Calls. */
 export class Sdk {
     private _identity: IIdentity = {
         shopId: '',
-    };
-
-    private _key: IKey = {
         privateKey: '',
     };
 
@@ -28,14 +22,10 @@ export class Sdk {
         }
 
         if (configObject?.privateKey) {
-            this._key.privateKey = configObject.privateKey;
+            this._identity.privateKey = configObject.privateKey;
         }
 
-        if (
-            (configObject?.mode == Mode.DEV ||
-                configObject?.mode == Mode.PREPROD) &&
-            configObject?.host != null
-        ) {
+        if (configObject?.mode == Mode.DEV && configObject?.host != null) {
             this._host = configObject.host;
             this._mode = configObject.mode;
         } else if (configObject?.mode != null && configObject?.host == null) {
@@ -57,11 +47,11 @@ export class Sdk {
     }
 
     get privateKey(): string | null {
-        return this._key.privateKey;
+        return this._identity.privateKey;
     }
 
     set privateKey(privateKey: string | null) {
-        this._key.privateKey = privateKey;
+        this._identity.privateKey = privateKey;
     }
 
     get mode(): Mode {

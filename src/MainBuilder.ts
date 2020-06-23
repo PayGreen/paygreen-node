@@ -1,5 +1,4 @@
-import { IIdentity } from './interfaces/IIdentity';
-import { IKey } from './interfaces/IKey';
+import { IIdentity } from './interfaces';
 import axios from 'axios';
 
 /**
@@ -13,7 +12,6 @@ import axios from 'axios';
  */
 export class MainBuilder {
     public identity: IIdentity;
-    public key: IKey;
     public host: string;
     public axiosConfig = {
         baseURL: '',
@@ -28,12 +26,20 @@ export class MainBuilder {
      * @param {IIdentity} identity - identity inherited from SDK class
      * @param {string} host - host of Api inherited from SDK
      */
-    constructor(key: IKey, identity: IIdentity, host: string) {
-        this.key = key;
+    constructor(identity: IIdentity, host: string) {
         this.identity = identity;
         this.host = host;
         this.axiosConfig.baseURL = host;
-        this.axiosConfig.headers.Authorization = `Bearer ${key.privateKey}`;
+        this.axiosConfig.headers.Authorization = `Bearer ${identity.privateKey}`;
         this.axiosRequest = axios.create(this.axiosConfig);
     }
+
+    /**
+     * BUILD URL FOR MAIN API ROUTES |
+     * @param {string} url - basic url value for each route
+     * @returns {string} - new built complete url
+     */
+    buildUrl = (url: string): string => {
+        return '/api/' + this.identity.shopId + '/' + url;
+    };
 }

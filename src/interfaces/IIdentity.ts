@@ -1,3 +1,4 @@
 export interface IIdentity {
-  shopId: string | null;
+    shopId: string | null;
+    privateKey: string | null;
 }

@@ -1,5 +1,5 @@
 require('dotenv').config('/.env');
-const { Mode } = require('../../src/enums/Mode');
+const { Mode } = require('../../src/enums');
 
 const localConfig = {
     shopId: process.env.SDK_SHOPID,

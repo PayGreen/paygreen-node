@@ -1,6 +1,5 @@
 require('dotenv').config('/.env');
-import { Sdk } from '../src/Sdk';
-import { Mode } from '../src/enums/Mode';
+import { Mode, Sdk } from '../src';
 
 const config = {
     shopId: process.env.SDK_SHOPID,
@@ -10,7 +9,6 @@ const config = {
 const sdk = new Sdk(config);
 
 test('Sdk has properties _key & _identity', () => {
-    expect(sdk).toHaveProperty('_key');
     expect(sdk).toHaveProperty('_identity');
 });
 
