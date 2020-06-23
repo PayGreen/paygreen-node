@@ -1,5 +1,5 @@
 export enum Host {
-    'DEV' = 'http://localhost',
-    'PREPROD' = 'http://localhost',
-    'PROD' = 'http://localhost',
+    'DEV' = 'http://sandbox.paygreen.fr',
+    'PREPROD' = 'http://sandbox.paygreen.fr',
+    'PROD' = 'http://paygreen.fr',
 }
