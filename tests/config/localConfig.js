@@ -1,4 +1,4 @@
-require('dotenv').config('/preprod.env');
+require('dotenv').config('/.env');
 const { Mode } = require('../../src/enums/Mode');
 
 const localConfig = {

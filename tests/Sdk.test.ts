@@ -5,11 +5,11 @@ import { Mode } from '../src/enums/Mode';
 const config = {
     shopId: process.env.SDK_SHOPID,
     privateKey: process.env.SDK_KEY,
-    mode: Mode.PREPROD,
+    mode: Mode.DEV,
 };
 const sdk = new Sdk(config);
 
-test('Sdk has properties _tokens & _identity', () => {
+test('Sdk has properties _key & _identity', () => {
     expect(sdk).toHaveProperty('_key');
     expect(sdk).toHaveProperty('_identity');
 });

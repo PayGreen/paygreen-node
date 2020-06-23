@@ -47,6 +47,7 @@ export class Sdk {
         }
     }
 
+    // GETTERS AND SETTERS
     get shopId(): string | null {
         return this._identity.shopId;
     }
