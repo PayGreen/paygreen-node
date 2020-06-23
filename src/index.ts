@@ -1,5 +1,4 @@
 import { Sdk } from './Sdk';
-import { Host } from './enums/Host';
-import { Mode } from './enums/Mode';
+import { Host, Mode } from './enums';
 
-export { Sdk, Host, Mode };
+export { Host, Mode, Sdk };
