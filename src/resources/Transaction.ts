@@ -5,16 +5,24 @@ import { serialize } from 'typescript-json-serializer';
 /**
  * Iban Class with all methods to request/modify Ibans infos
  * @property {string} url - main url to build Api requests for this class
- * @property {string} urlExtension - url Extension to build Iban Individual Request
  */
 export class Transaction extends MainBuilder {
     static url: string = '/payins/transaction';
 
     /**
      * CREATE CASH | POST /api/{identifiant}/payins/transaction/cash
+     * @param {TransactionModel} newTransaction - object containing all new transaction informations
+     * @returns {Promise.<Object>} Get object with new transaction created
      */
     createCash = (newTransaction: TransactionModel): Promise<Object> => {
         const urlExtension: string = '/cash';
+
+        if (newTransaction.buyer == null) {
+            throw new Error(
+                "Field 'buyer' must be of Buyer Class and not empty to create cash transaction",
+            );
+        }
+
         const serializedTransaction = serialize(newTransaction);
 
         return this.axiosRequest
@@ -23,20 +31,27 @@ export class Transaction extends MainBuilder {
                 serializedTransaction,
             )
             .then((res) => {
-                console.log(res);
+                console.log('STATUS', res.status, 'DATA', res.data);
             })
-            .catch((err) => {
-                console.log(err);
-            });
+            .catch((err) => {});
     };
 
     /**
      * CREATE SUBSCRIPTION | POST /api/{identifiant}/payins/transaction/subscription
+     * @param {TransactionModel} newTransaction - object containing all new transaction informations
+     * @returns {Promise.<Object>} Get object with new transaction created
      */
     createSubscription = (
         newTransaction: TransactionModel,
     ): Promise<Object> => {
         const urlExtension: string = '/subscription';
+
+        if (newTransaction.orderDetails == null) {
+            throw new Error(
+                "Field 'orderDetails' must be of OrderDetails Class and not empty to create subscription transaction",
+            );
+        }
+
         const serializedTransaction = serialize(newTransaction);
 
         return this.axiosRequest
@@ -45,18 +60,25 @@ export class Transaction extends MainBuilder {
                 serializedTransaction,
             )
             .then((res) => {
-                console.log(res);
+                console.log('STATUS', res.status, 'DATA', res.data);
             })
-            .catch((err) => {
-                console.log(err);
-            });
+            .catch((err) => {});
     };
 
     /**
      * CREATE XTIME | POST /api/{identifiant}/payins/transaction/xtime
+     * @param {TransactionModel} newTransaction - object containing all new transaction informations
+     * @returns {Promise.<Object>} Get object with new transaction created
      */
     createXTime = (newTransaction: TransactionModel): Promise<Object> => {
         const urlExtension: string = '/xtime';
+
+        if (newTransaction.orderDetails == null) {
+            throw new Error(
+                "Field 'orderDetails' must be of OrderDetails Class and not empty to create xTime transaction",
+            );
+        }
+
         const serializedTransaction = serialize(newTransaction);
 
         return this.axiosRequest
@@ -65,18 +87,25 @@ export class Transaction extends MainBuilder {
                 serializedTransaction,
             )
             .then((res) => {
-                console.log(res);
+                console.log('STATUS', res.status, 'DATA', res.data);
             })
-            .catch((err) => {
-                console.log(err);
-            });
+            .catch((err) => {});
     };
 
     /**
      * CREATE TOKENIZE | POST /api/{identifiant}/payins/transaction/tokenize
+     * @param {TransactionModel} newTransaction - object containing all new transaction informations
+     * @returns {Promise.<Object>} Get object with new transaction created
      */
     createTokenize = (newTransaction: TransactionModel): Promise<Object> => {
         const urlExtension: string = '/tokenize';
+
+        if (newTransaction.buyer == null) {
+            throw new Error(
+                "Field 'buyer' must be of Buyer Class and not empty to create tokenize transaction",
+            );
+        }
+
         const serializedTransaction = serialize(newTransaction);
 
         return this.axiosRequest
@@ -85,148 +114,8 @@ export class Transaction extends MainBuilder {
                 serializedTransaction,
             )
             .then((res) => {
-                console.log(res);
+                console.log('STATUS', res.status, 'DATA', res.data);
             })
-            .catch((err) => {
-                console.log(err);
-            });
+            .catch((err) => {});
     };
-    //    /**
-    //     * CREATE ONE | /account/me/user/{username}/rib
-    //     * @param {IbanModel} newIban - object containing all new iban information, only Admin can create Iban
-    //     * @param {string?} userNameValue - Optional, by default UserName used will be the one from identity
-    //     * @returns {Promise.<IApiResponse>} Get object with new iban created.
-    //     */
-    //    create = (
-    //        newIban: IbanModel,
-    //        userNameValue?: string,
-    //    ): Promise<IApiResponse> => {
-    //        const serializedIban = serialize(newIban);
-    //        return this.axiosRequest
-    //            .post(
-    //                this.buildIbanUrl(this.buildUrl(true, Iban.url, userNameValue)),
-    //                serializedIban,
-    //            )
-    //            .then((res) => {
-    //                return this.ApiResponse.formatResponse(
-    //                    true,
-    //                    res.data,
-    //                    res.status,
-    //                );
-    //            })
-    //            .catch(this.ApiResponse.formatError);
-    //    };
-    //
-    //    /**
-    //     * GET ONE | /account/me/user/{username}/rib/{iban_id}
-    //     * @param {number} ibanId - unique number to identify the iban
-    //     * @param {string?} userNameValue - Optional, by default UserName used will be the one from identity, only Admin
-    //     * can use a specific UserNameValue to get an iban of a different user of the company account
-    //     * @returns {Promise.<IApiResponse>} Get information about a specific iban
-    //     */
-    //    getOne = (
-    //        ibanId: number,
-    //        userNameValue?: string,
-    //    ): Promise<IApiResponse> => {
-    //        return this.axiosRequest
-    //            .get(
-    //                this.buildIbanUrl(
-    //                    this.buildUrl(true, Iban.url, userNameValue),
-    //                    ibanId,
-    //                ),
-    //            )
-    //            .then((res) => {
-    //                return this.ApiResponse.formatResponse(
-    //                    true,
-    //                    res.data,
-    //                    res.status,
-    //                );
-    //            })
-    //            .catch(this.ApiResponse.formatError);
-    //    };
-    //
-    //    /**
-    //     * SET ONE | /account/me/user/{username}/rib/{iban_id}
-    //     * @param {number} ibanId - unique number to identify the iban
-    //     * @param {string?} userNameValue - Optional, by default UserName used will be the one from identity, only Admin can change default iban.
-    //     * @returns {Promise.<IApiResponse>} - Set one iban as default one.
-    //     */
-    //    setAsDefault = (
-    //        ibanId: number,
-    //        userNameValue?: string,
-    //    ): Promise<IApiResponse> => {
-    //        return this.axiosRequest
-    //            .patch(
-    //                this.buildIbanUrl(
-    //                    this.buildUrl(true, Iban.url, userNameValue),
-    //                    ibanId,
-    //                ),
-    //            )
-    //            .then((res) => {
-    //                return this.ApiResponse.formatResponse(
-    //                    true,
-    //                    res.data,
-    //                    res.status,
-    //                );
-    //            })
-    //            .catch(this.ApiResponse.formatError);
-    //    };
-    //
-    //    /**
-    //     * DELETE ONE | /account/me/user/{username}/rib/{iban_id}
-    //     * @param {number} ibanId - unique number to identify the iban
-    //     * @param {string} UserNameValue - Admin Only - to delete one iban of a user from the company account
-    //     * @returns {Promise.<IApiResponse>} Get response with status 204 if success.
-    //     */
-    //    delete = (
-    //        ibanId: number,
-    //        userNameValue?: string,
-    //    ): Promise<IApiResponse> => {
-    //        return this.axiosRequest
-    //            .delete(
-    //                this.buildIbanUrl(
-    //                    this.buildUrl(true, Iban.url, userNameValue),
-    //                    ibanId,
-    //                ),
-    //            )
-    //            .then((res) => {
-    //                return this.ApiResponse.formatResponse(
-    //                    true,
-    //                    'user deleted successfully',
-    //                    res.status,
-    //                );
-    //            })
-    //            .catch(this.ApiResponse.formatError);
-    //    };
-    //
-    //    /**
-    //     * VALIDATE (reserved to 'Paygreen' account users) | /account/me/user/{username}/rib/{iban_id}
-    //     *  @param {number} ibanId - unique number to identify the iban
-    //     *  @param {IbanValidationModel} ValidatedIban - Object containing all new iban information
-    //     *  @param {string} userNameValue - UserName of the owner of the iban
-    //     *  @returns {Promise.<IApiResponse>} Get object with iban validated
-    //     */
-    //    validate = (
-    //        ValidatedIban: IbanValidationModel,
-    //        ibanId: number,
-    //        userNameValue: string,
-    //    ): Promise<IApiResponse> => {
-    //        const serializedValidatedIban = serialize(ValidatedIban);
-    //        return this.axiosRequest
-    //            .put(
-    //                this.buildIbanUrl(
-    //                    this.buildUrl(true, Iban.url, userNameValue),
-    //                    ibanId,
-    //                ),
-    //                serializedValidatedIban,
-    //            )
-    //            .then((res) => {
-    //                return this.ApiResponse.formatResponse(
-    //                    true,
-    //                    res.data,
-    //                    res.status,
-    //                );
-    //            })
-    //            .catch(this.ApiResponse.formatError);
-    //    };
 }
