@@ -1,8 +1,11 @@
 import { IConfig, IIdentity } from './interfaces';
 import { Host, Mode } from './enums';
+import { Transaction } from './resources';
 
 /** The Sdk Main Class to make APIPayGreen Calls. */
 export class Sdk {
+    public transaction: Transaction;
+
     private _identity: IIdentity = {
         shopId: '',
         privateKey: '',
@@ -35,6 +38,7 @@ export class Sdk {
             this._mode = Mode.PROD;
             this._host = Host[Mode[Mode.PROD]];
         }
+        this.transaction = new Transaction(this._identity, this._host);
     }
 
     // GETTERS AND SETTERS
