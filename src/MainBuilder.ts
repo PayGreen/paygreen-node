@@ -41,6 +41,6 @@ export class MainBuilder {
      * @returns {string} - new built complete url
      */
     buildUrl = (url: string): string => {
-        return '/api/' + this.identity.shopId + '/' + url;
+        return '/api/' + this.identity.shopId + url;
     };
 }
