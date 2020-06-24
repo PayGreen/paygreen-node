@@ -1,11 +1,16 @@
 import { Serializable, JsonProperty } from 'typescript-json-serializer';
-import { IsEmail, MinLength, IsISO31661Alpha2 } from 'class-validator';
+import { IsEmail, IsISO31661Alpha2, MinLength } from 'class-validator';
 import { Country } from '../enums';
 
 /**
  * Buyer Model Class with methods to create and manage buyer informations
+ * @property {string?} id - unique identifier of buyer
+ * @property {string?} lastName - lastname of buyer
+ * @property {string?} firstName - firstname of buyer
+ * @property {string?} email - email of buyer
+ * @property {Country?} country - name of buyer's country in ISO3166-1 format
+ * @property {string?} companyName - company name if buyer is a company
  */
-
 @Serializable()
 export class Buyer {
     @JsonProperty('id')
@@ -26,10 +31,9 @@ export class Buyer {
 
     @JsonProperty('country')
     @IsISO31661Alpha2()
-    public country?: Country | null;
+    public country?: string | null;
 
     @JsonProperty('companyName')
-    @MinLength(1)
     public companyName?: string | null;
 
     constructor(
@@ -44,7 +48,9 @@ export class Buyer {
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
-        this.country = country;
+        if (country != null) {
+            this.country = Country[country];
+        }
         this.companyName = companyName;
     }
 }
