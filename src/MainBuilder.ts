@@ -8,7 +8,7 @@ import { ApiResponse } from './models';
  * @property {IIdentity} identity - identity inherited from SDK class to authorize access to API and build url
  * @property {IKey} key - private key inherited from SDK class
  * @property {string} host - host of Api inherited from SDK class based on mode of production
- * @property {any} ApiResponse - class to normalize all Api Responses for better readibility
+ * @property {ApiResponse} ApiResponse - class to normalize all Api Responses for better readibility
  * @property {object} axiosConfig - all parameters for axios instance
  * @property {any} axiosRequest -  create a new instance of axios with a custom config
  */
