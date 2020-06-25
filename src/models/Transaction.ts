@@ -45,7 +45,6 @@ export class Transaction {
     public paymentType?: string | null;
 
     @JsonProperty('returned_url')
-    @IsUrl()
     public returnedUrl?: string | null;
 
     @JsonProperty('notified_url')

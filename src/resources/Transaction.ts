@@ -1,6 +1,7 @@
 import { MainBuilder } from '../MainBuilder';
 import { Transaction as TransactionModel } from '../models';
 import { serialize } from 'typescript-json-serializer';
+import { IApiResponse } from '../interfaces/IApiResponse';
 
 /**
  * Iban Class with all methods to request/modify Ibans infos
@@ -14,15 +15,8 @@ export class Transaction extends MainBuilder {
      * @param {TransactionModel} newTransaction - object containing all new transaction informations
      * @returns {Promise.<Object>} Get object with new transaction created
      */
-    createCash = (newTransaction: TransactionModel): Promise<Object> => {
+    createCash = (newTransaction: TransactionModel): Promise<IApiResponse> => {
         const urlExtension: string = '/cash';
-
-        if (newTransaction.buyer == null) {
-            throw new Error(
-                "Field 'buyer' must be of Buyer Class and not empty to create cash transaction",
-            );
-        }
-
         const serializedTransaction = serialize(newTransaction);
 
         return this.axiosRequest
@@ -31,9 +25,16 @@ export class Transaction extends MainBuilder {
                 serializedTransaction,
             )
             .then((res) => {
-                console.log('STATUS', res.status, 'DATA', res.data);
+                return this.ApiResponse.formatResponse(
+                    true,
+                    res.status,
+                    res.statusText,
+                    res.config,
+                    res.request,
+                    res.data,
+                );
             })
-            .catch((err) => {});
+            .catch(this.ApiResponse.formatError);
     };
 
     /**
@@ -43,15 +44,8 @@ export class Transaction extends MainBuilder {
      */
     createSubscription = (
         newTransaction: TransactionModel,
-    ): Promise<Object> => {
+    ): Promise<IApiResponse> => {
         const urlExtension: string = '/subscription';
-
-        if (newTransaction.orderDetails == null) {
-            throw new Error(
-                "Field 'orderDetails' must be of OrderDetails Class and not empty to create subscription transaction",
-            );
-        }
-
         const serializedTransaction = serialize(newTransaction);
 
         return this.axiosRequest
@@ -60,9 +54,16 @@ export class Transaction extends MainBuilder {
                 serializedTransaction,
             )
             .then((res) => {
-                console.log('STATUS', res.status, 'DATA', res.data);
+                return this.ApiResponse.formatResponse(
+                    true,
+                    res.status,
+                    res.statusText,
+                    res.config,
+                    res.request,
+                    res.data,
+                );
             })
-            .catch((err) => {});
+            .catch(this.ApiResponse.formatError);
     };
 
     /**
@@ -70,15 +71,8 @@ export class Transaction extends MainBuilder {
      * @param {TransactionModel} newTransaction - object containing all new transaction informations
      * @returns {Promise.<Object>} Get object with new transaction created
      */
-    createXTime = (newTransaction: TransactionModel): Promise<Object> => {
+    createXTime = (newTransaction: TransactionModel): Promise<IApiResponse> => {
         const urlExtension: string = '/xtime';
-
-        if (newTransaction.orderDetails == null) {
-            throw new Error(
-                "Field 'orderDetails' must be of OrderDetails Class and not empty to create xTime transaction",
-            );
-        }
-
         const serializedTransaction = serialize(newTransaction);
 
         return this.axiosRequest
@@ -87,9 +81,16 @@ export class Transaction extends MainBuilder {
                 serializedTransaction,
             )
             .then((res) => {
-                console.log('STATUS', res.status, 'DATA', res.data);
+                return this.ApiResponse.formatResponse(
+                    true,
+                    res.status,
+                    res.statusText,
+                    res.config,
+                    res.request,
+                    res.data,
+                );
             })
-            .catch((err) => {});
+            .catch(this.ApiResponse.formatError);
     };
 
     /**
@@ -97,15 +98,10 @@ export class Transaction extends MainBuilder {
      * @param {TransactionModel} newTransaction - object containing all new transaction informations
      * @returns {Promise.<Object>} Get object with new transaction created
      */
-    createTokenize = (newTransaction: TransactionModel): Promise<Object> => {
+    createTokenize = (
+        newTransaction: TransactionModel,
+    ): Promise<IApiResponse> => {
         const urlExtension: string = '/tokenize';
-
-        if (newTransaction.buyer == null) {
-            throw new Error(
-                "Field 'buyer' must be of Buyer Class and not empty to create tokenize transaction",
-            );
-        }
-
         const serializedTransaction = serialize(newTransaction);
 
         return this.axiosRequest
@@ -114,8 +110,15 @@ export class Transaction extends MainBuilder {
                 serializedTransaction,
             )
             .then((res) => {
-                console.log('STATUS', res.status, 'DATA', res.data);
+                return this.ApiResponse.formatResponse(
+                    true,
+                    res.status,
+                    res.statusText,
+                    res.config,
+                    res.request,
+                    res.data,
+                );
             })
-            .catch((err) => {});
+            .catch(this.ApiResponse.formatError);
     };
 }

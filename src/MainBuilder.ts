@@ -1,6 +1,7 @@
 
 import { IIdentity } from './interfaces';
 import axios from 'axios';
+import { ApiResponse } from './models';
 
 /**
  * Main Builder with config constructor
@@ -14,6 +15,7 @@ import axios from 'axios';
 export class MainBuilder {
     public identity: IIdentity;
     public host: string;
+    public ApiResponse: any = ApiResponse;
     public axiosConfig = {
         baseURL: '',
         timeout: 3000,
@@ -30,6 +32,7 @@ export class MainBuilder {
     constructor(identity: IIdentity, host: string) {
         this.identity = identity;
         this.host = host;
+        this.ApiResponse;
         this.axiosConfig.baseURL = host;
         this.axiosConfig.headers.Authorization = `Bearer ${identity.privateKey}`;
         this.axiosRequest = axios.create(this.axiosConfig);
