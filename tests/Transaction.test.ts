@@ -260,7 +260,36 @@ test('it cause an error during tokenize transaction', () => {
         });
 });
 
-const checkRightResponse = (response: IApiResponse) => {
+test('it returns the details of the transaction', () => {
+    const newTransaction = new Transaction();
+    newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
+    newTransaction.amount = 1450;
+    newTransaction.currency = 'EUR';
+    newTransaction.paymentType = 'CB';
+    newTransaction.notifiedUrl = 'http://example.com/retour-server';
+    newTransaction.buyer = buyer;
+    newTransaction.metadata = {
+        orderId: `oid${Math.floor(Math.random() * 10000)}`,
+        display: '0',
+    };
+    newTransaction.ttl = 'PT1M';
+
+    const transactionId: Array<string> = [];
+    sdk.transaction
+        .createCash(newTransaction)
+        .then((response: any) => {
+            transactionId.push(response.dataInfo.data.id);
+        })
+        .finally(() => {
+            sdk.transaction
+                .getDetails(transactionId[0])
+                .then((response: any) => {
+                    const { dataInfo } = response;
+                });
+        });
+});
+
+const checkRightResponse = (response: any) => {
     const { success, dataInfo } = response;
     expect(success).toBe(true),
         expect(ApiResponse.isSuccessful(response)).toBe(true),
