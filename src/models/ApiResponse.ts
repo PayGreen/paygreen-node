@@ -8,8 +8,6 @@ export class ApiResponse {
      *  @param {boolean} success -
      *  @param {number} status -
      *  @param {string} message -
-     *  @param {any} config -
-     *  @param {any} request -
      *  @param {any} data -
      *  @returns {IApiResponse} - global object with complete response formatted
      */
