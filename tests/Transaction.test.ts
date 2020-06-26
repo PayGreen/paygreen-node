@@ -284,7 +284,17 @@ test('it returns the details of the transaction', () => {
             sdk.transaction
                 .getDetails(transactionId[0])
                 .then((response: any) => {
+                    checkRightResponse(response);
                     const { dataInfo } = response;
+
+                    expect(dataInfo.data).toHaveProperty(
+                        'id',
+                        transactionId[0],
+                    ),
+                        expect(dataInfo.data).toHaveProperty(
+                            'id',
+                            transactionId[0],
+                        );
                 });
         });
 });

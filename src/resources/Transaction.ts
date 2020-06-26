@@ -128,7 +128,14 @@ export class Transaction extends MainBuilder {
                     'Content-Type': 'application/json',
                 },
             })
-            .then((res) => res)
+            .then((res) => {
+                return this.ApiResponse.formatResponse(
+                    true,
+                    res.status,
+                    res.statusText,
+                    res.data,
+                );
+            })
             .catch(this.ApiResponse.formatError);
     };
 }
