@@ -1,10 +1,10 @@
 import { MainBuilder } from '../MainBuilder';
 import { Transaction as TransactionModel } from '../models';
 import { serialize } from 'typescript-json-serializer';
-import { IApiResponse } from '../interfaces/IApiResponse';
+import { IApiResponse } from '../interfaces';
 
 /**
- * Iban Class with all methods to request/modify Ibans infos
+ * Transaction Class with all methods to request/modify Transactions infos
  * @property {string} url - main url to build Api requests for this class
  */
 export class Transaction extends MainBuilder {
@@ -29,8 +29,6 @@ export class Transaction extends MainBuilder {
                     true,
                     res.status,
                     res.statusText,
-                    res.config,
-                    res.request,
                     res.data,
                 );
             })
@@ -58,8 +56,6 @@ export class Transaction extends MainBuilder {
                     true,
                     res.status,
                     res.statusText,
-                    res.config,
-                    res.request,
                     res.data,
                 );
             })
@@ -85,8 +81,6 @@ export class Transaction extends MainBuilder {
                     true,
                     res.status,
                     res.statusText,
-                    res.config,
-                    res.request,
                     res.data,
                 );
             })
@@ -114,8 +108,6 @@ export class Transaction extends MainBuilder {
                     true,
                     res.status,
                     res.statusText,
-                    res.config,
-                    res.request,
                     res.data,
                 );
             })

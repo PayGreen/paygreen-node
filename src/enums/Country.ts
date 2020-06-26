@@ -247,5 +247,5 @@ export enum Country {
     'YT',
     'ZA',
     'ZM',
-    'ZW',	
+    'ZW',
 }

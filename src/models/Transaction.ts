@@ -5,6 +5,7 @@ import {
     IsUrl,
     Matches,
     ValidateNested,
+    IsOptional,
 } from 'class-validator';
 import { Buyer } from './Buyer';
 import { OrderDetails } from './OrderDetails';
@@ -45,6 +46,8 @@ export class Transaction {
     public paymentType?: string | null;
 
     @JsonProperty('returned_url')
+    @IsOptional()
+    @IsUrl()
     public returnedUrl?: string | null;
 
     @JsonProperty('notified_url')
@@ -52,6 +55,7 @@ export class Transaction {
     public notifiedUrl?: string | null;
 
     @JsonProperty('idFingerprint')
+    @IsOptional()
     public idFingerprint?: number | null;
 
     @JsonProperty('buyer')
@@ -66,9 +70,11 @@ export class Transaction {
     public metadata?: object | null;
 
     @JsonProperty('eligibleAmount')
+    @IsOptional()
     public eligibleAmount?: object | null;
 
     @JsonProperty('card')
+    @IsOptional()
     public card?: object | null;
 
     @JsonProperty('ttl')

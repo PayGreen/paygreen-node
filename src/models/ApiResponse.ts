@@ -17,17 +17,13 @@ export class ApiResponse {
         success: boolean,
         status: number,
         message: string,
-        config: any,
-        request: any,
-        data: any,
+        dataInfo: any,
     ): IApiResponse => {
         return {
             success: success,
             status: status,
             message: message,
-            config: config,
-            request: request,
-            data: data,
+            dataInfo: dataInfo,
         };
     };
 
@@ -38,13 +34,10 @@ export class ApiResponse {
      *  @returns {IApiResponse} - global object with complete response formatted
      */
     static formatError = (error: any): IApiResponse => {
-        console.log(error.response.data);
         return ApiResponse.formatResponse(
             false,
             error.response.status,
             error.response.statusText,
-            error.response.config,
-            error.response.request,
             error.response.data,
         );
     };
@@ -85,7 +78,7 @@ export class ApiResponse {
      *  @returns {string} - error message details
      */
     static getErrorMessage = (response: any): string => {
-        return response.success ? 'none' : response.data.message;
+        return response.success ? 'none' : response.dataInfo.message;
     };
 
     /**
