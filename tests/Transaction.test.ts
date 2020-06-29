@@ -290,11 +290,7 @@ test('it returns the details of the transaction', () => {
                     expect(dataInfo.data).toHaveProperty(
                         'id',
                         transactionId[0],
-                    ),
-                        expect(dataInfo.data).toHaveProperty(
-                            'id',
-                            transactionId[0],
-                        );
+                    );
                 });
         });
 });
