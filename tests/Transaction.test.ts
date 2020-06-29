@@ -345,10 +345,50 @@ test('it cancels a cash transaction', () => {
         });
 });
 
+test('it returns the transaction with the modified amount ', () => {
+    const newTransaction = new Transaction();
+    newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
+    newTransaction.amount = 1450;
+    newTransaction.currency = 'EUR';
+    newTransaction.paymentType = 'CB';
+    newTransaction.notifiedUrl = 'http://example.com/retour-server';
+    newTransaction.buyer = buyer;
+    newTransaction.metadata = {
+        orderId: `oid${Math.floor(Math.random() * 10000)}`,
+        display: '0',
+    };
+    newTransaction.ttl = 'PT1M';
+
+    var transactionId: string = '';
+    return sdk.transaction
+        .createCash(newTransaction)
+        .then((response: IApiResponse) => {
+            transactionId = response.dataInfo.data.id;
+        })
+        .finally(() => {
+            sdk.transaction
+                .modify(transactionId, 9000)
+                .then((response: IApiResponse) => {
+                    checkRightResponse(response);
+                    const { dataInfo } = response;
+
+                    expect(dataInfo.data).toHaveProperty('amount', 9000);
+                });
+        });
+});
+
 test('it causes error during cancellation', () => {
     sdk.transaction.cancel('aaaaaaaaaa').then((response: IApiResponse) => {
         checkWrongResponse(response);
     });
+});
+
+test('it causes an error during modification of unknow transaction', () => {
+    sdk.transaction
+        .modify('aaaaaaaaaa', 9000)
+        .then((response: IApiResponse) => {
+            checkWrongResponse(response);
+        });
 });
 
 // CHECK'S METHODS

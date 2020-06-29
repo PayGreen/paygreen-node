@@ -164,4 +164,36 @@ export class Transaction extends MainBuilder {
             })
             .catch(this.ApiResponse.formatError);
     };
+
+    /**
+     * MODIFY | PATCH /api/{identifiant}/payins/transaction/{transactionId}
+     * @param {string} transactionId - unique id of a transaction
+     * @param {number} newAmount - new amount of the transaction
+     * @returns {Promise.<IApiResponse>} Get object with the modified amount
+     */
+    modify = (
+        transactionId: string,
+        newAmount: number,
+    ): Promise<IApiResponse> => {
+        const urlExtension: string = '/' + transactionId;
+        const data = {
+            amount: newAmount,
+        };
+
+        return this.axiosRequest
+            .patch(this.buildUrl(Transaction.url) + urlExtension, data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then((res) => {
+                return this.ApiResponse.formatResponse(
+                    true,
+                    res.status,
+                    res.statusText,
+                    res.data,
+                );
+            })
+            .catch(this.ApiResponse.formatError);
+    };
 }
