@@ -277,13 +277,13 @@ test('it returns the details of the transaction', () => {
     const transactionId: Array<string> = [];
     sdk.transaction
         .createCash(newTransaction)
-        .then((response: any) => {
+        .then((response: IApiResponse) => {
             transactionId.push(response.dataInfo.data.id);
         })
         .finally(() => {
             sdk.transaction
                 .getDetails(transactionId[0])
-                .then((response: any) => {
+                .then((response: IApiResponse) => {
                     checkRightResponse(response);
                     const { dataInfo } = response;
 
@@ -292,6 +292,14 @@ test('it returns the details of the transaction', () => {
                         transactionId[0],
                     );
                 });
+        });
+});
+
+test('it causes an error during getDetails method', () => {
+    return sdk.transaction
+        .getDetails('aaaaaaaaaa')
+        .then((response: IApiResponse) => {
+            checkWrongResponse(response);
         });
 });
 
@@ -309,6 +317,8 @@ const checkWrongResponse = (response: IApiResponse) => {
         expect(
             ApiResponse.isInvalid(response) ||
                 ApiResponse.causedAnError(response),
-        ).toBe(true),
+        ).toBe(true);
+    if (dataInfo.success) {
         expect(dataInfo.success).toEqual(false);
+    }
 };
