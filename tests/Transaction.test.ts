@@ -373,6 +373,16 @@ test('it returns the transaction with the modified amount ', () => {
                     const { dataInfo } = response;
 
                     expect(dataInfo.data).toHaveProperty('amount', 9000);
+                })
+                .finally(() => {
+                    sdk.transaction
+                        .getDetails(transactionId[0])
+                        .then((response: IApiResponse) => {
+                            expect(response.dataInfo.data).toHaveProperty(
+                                'amount',
+                                9000,
+                            );
+                        });
                 });
         });
 });
