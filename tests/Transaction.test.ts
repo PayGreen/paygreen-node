@@ -331,6 +331,16 @@ test('it cancel a cash transaction', () => {
 
                     const { dataInfo } = response;
                     expect(dataInfo.data.result.status).toBe('CANCELLED');
+                })
+                .finally(() => {
+                    sdk.transaction
+                        .getDetails(transactionId[0])
+                        .then((response: IApiResponse) => {
+                            const { dataInfo } = response;
+                            expect(dataInfo.data.result.status).toBe(
+                                'CANCELLED',
+                            );
+                        });
                 });
         });
 });
