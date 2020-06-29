@@ -13,7 +13,7 @@ export class Transaction extends MainBuilder {
     /**
      * CREATE CASH | POST /api/{identifiant}/payins/transaction/cash
      * @param {TransactionModel} newTransaction - object containing all new transaction informations
-     * @returns {Promise.<Object>} Get object with new transaction created
+     * @returns {Promise.<IApiResponse>} Get object with new transaction created
      */
     createCash = (newTransaction: TransactionModel): Promise<IApiResponse> => {
         const urlExtension: string = '/cash';
@@ -38,7 +38,7 @@ export class Transaction extends MainBuilder {
     /**
      * CREATE SUBSCRIPTION | POST /api/{identifiant}/payins/transaction/subscription
      * @param {TransactionModel} newTransaction - object containing all new transaction informations
-     * @returns {Promise.<Object>} Get object with new transaction created
+     * @returns {Promise.<IApiResponse>} Get object with new transaction created
      */
     createSubscription = (
         newTransaction: TransactionModel,
@@ -65,7 +65,7 @@ export class Transaction extends MainBuilder {
     /**
      * CREATE XTIME | POST /api/{identifiant}/payins/transaction/xtime
      * @param {TransactionModel} newTransaction - object containing all new transaction informations
-     * @returns {Promise.<Object>} Get object with new transaction created
+     * @returns {Promise.<IApiResponse>} Get object with new transaction created
      */
     createXTime = (newTransaction: TransactionModel): Promise<IApiResponse> => {
         const urlExtension: string = '/xtime';
@@ -90,7 +90,7 @@ export class Transaction extends MainBuilder {
     /**
      * CREATE TOKENIZE | POST /api/{identifiant}/payins/transaction/tokenize
      * @param {TransactionModel} newTransaction - object containing all new transaction informations
-     * @returns {Promise.<Object>} Get object with new transaction created
+     * @returns {Promise.<IApiResponse>} Get object with new transaction created
      */
     createTokenize = (
         newTransaction: TransactionModel,
@@ -117,7 +117,7 @@ export class Transaction extends MainBuilder {
     /**
      * GET DETAILS | GET /api/{identifiant}/payins/transaction/{transactionId}
      * @param {string} transactionId - unique id of a transaction
-     * @returns {Promise.<Object>} Get object with transaction details
+     * @returns {Promise.<IApiResponse>} Get object with transaction details
      */
     getDetails = (transactionId: string): Promise<IApiResponse> => {
         const urlExtension: string = '/' + transactionId;
@@ -127,6 +127,32 @@ export class Transaction extends MainBuilder {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+            })
+            .then((res) => {
+                return this.ApiResponse.formatResponse(
+                    true,
+                    res.status,
+                    res.statusText,
+                    res.data,
+                );
+            })
+            .catch(this.ApiResponse.formatError);
+    };
+
+    /**
+     * CANCEL | POST /api/{identifiant}/payins/transaction/cancel
+     * @param {string} transactionId - unique id of a transaction
+     * @returns {Promise.<IApiResponse>} Get object with transaction details
+     */
+    cancel = (transactionId: string): Promise<IApiResponse> => {
+        const urlExtension: string = '/cancel';
+
+        return this.axiosRequest
+            .post(this.buildUrl(Transaction.url) + urlExtension, {
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+                id: transactionId,
             })
             .then((res) => {
                 return this.ApiResponse.formatResponse(
