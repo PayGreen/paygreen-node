@@ -76,7 +76,7 @@ export class ApiResponse {
      *  @returns {string} - error message details
      */
     static getErrorMessage = (response: any): string => {
-        return response.success ? 'none' : response.dataInfo.message;
+        return response.success ? 'no error' : response.dataInfo.message;
     };
 
     /**
