@@ -18,7 +18,7 @@ const buyer = new Buyer(
 
 const orderDetails = new OrderDetails(40, 3, 0, new Date().toISOString(), 0);
 
-test('it returns the created cash transaction', () => {
+test('It returns the created cash transaction', () => {
     const newTransaction = new Transaction();
     newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
     newTransaction.amount = 1450;
@@ -62,7 +62,7 @@ test('it returns the created cash transaction', () => {
         });
 });
 
-test('it cause an error during cash transaction', () => {
+test('It cause an error during cash transaction', () => {
     const newTransaction = new Transaction();
     // No orderId for this Transaction
     newTransaction.amount = 1450;
@@ -78,7 +78,7 @@ test('it cause an error during cash transaction', () => {
         });
 });
 
-test('it returns the created subscription transaction', () => {
+test('It returns the created subscription transaction', () => {
     const newTransaction = new Transaction();
     newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
     newTransaction.amount = 1450;
@@ -123,7 +123,7 @@ test('it returns the created subscription transaction', () => {
         });
 });
 
-test('it cause an error during subscription transaction', () => {
+test('It cause an error during subscription transaction', () => {
     const newTransaction = new Transaction();
     // No orderId for this Transaction
     newTransaction.amount = 1450;
@@ -139,7 +139,7 @@ test('it cause an error during subscription transaction', () => {
         });
 });
 
-test('it returns the created xTime transaction', () => {
+test('It returns the created xTime transaction', () => {
     const newTransaction = new Transaction();
     newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
     newTransaction.amount = 1450;
@@ -184,7 +184,7 @@ test('it returns the created xTime transaction', () => {
         });
 });
 
-test('it cause an error during xTime transaction', () => {
+test('It cause an error during xTime transaction', () => {
     const newTransaction = new Transaction();
     // No orderId for this Transaction
     newTransaction.amount = 1450;
@@ -200,7 +200,7 @@ test('it cause an error during xTime transaction', () => {
         });
 });
 
-test('it returns the created tokenize transaction', () => {
+test('It returns the created tokenize transaction', () => {
     const newTransaction = new Transaction();
     newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
     newTransaction.amount = 1450;
@@ -244,7 +244,7 @@ test('it returns the created tokenize transaction', () => {
         });
 });
 
-test('it cause an error during tokenize transaction', () => {
+test('It cause an error during tokenize transaction', () => {
     const newTransaction = new Transaction();
     // No orderId for this Transaction
     newTransaction.amount = 1450;
@@ -260,7 +260,7 @@ test('it cause an error during tokenize transaction', () => {
         });
 });
 
-test('it returns the details of the transaction', () => {
+test('It returns the details of the transaction', () => {
     const newTransaction = new Transaction();
     newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
     newTransaction.amount = 1450;
@@ -295,7 +295,7 @@ test('it returns the details of the transaction', () => {
         });
 });
 
-test('it causes an error during getDetails method', () => {
+test('It causes an error during getDetails method', () => {
     return sdk.transaction
         .getDetails('aaaaaaaaaa')
         .then((response: IApiResponse) => {
@@ -401,8 +401,11 @@ test('it causes an error during modification of unknow transaction', () => {
         });
 });
 
-// CHECK'S METHODS
-const checkRightResponse = (response: any) => {
+/** CHECK RIGHT RESPONSE |
+ * @description - Check that the Api response was a success
+ * @param {IApiResponse} response - A response from Api formatted by ApiResponse.formatResponse()
+ */
+const checkRightResponse = (response: IApiResponse) => {
     const { success, dataInfo } = response;
     expect(success).toBe(true),
         expect(ApiResponse.isSuccessful(response)).toBe(true),
@@ -410,6 +413,10 @@ const checkRightResponse = (response: any) => {
         expect(dataInfo.code).toEqual(0);
 };
 
+/** CHECK WRONG RESPONSE |
+ * @description - Check that the Api response was a failure
+ * @param {IApiResponse} response - A response from Api formatted by ApiResponse.formatResponse()
+ */
 const checkWrongResponse = (response: IApiResponse) => {
     const { success, dataInfo } = response;
     expect(success).toBe(false),

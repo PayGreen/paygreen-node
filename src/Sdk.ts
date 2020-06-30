@@ -2,7 +2,10 @@ import { IConfig, IIdentity } from './interfaces';
 import { Host, Mode } from './enums';
 import { Transaction } from './resources';
 
-/** The Sdk Main Class to make APIPayGreen Calls. */
+/** 
+ * The Sdk Main Class to make APIPayGreen Calls. 
+ * @property {Transaction} transaction - A class to use transactions related requests
+*/
 export class Sdk {
     public transaction: Transaction;
 
@@ -16,8 +19,8 @@ export class Sdk {
     private _host: string;
 
     /**
-     * Create the user configuration.
-     * @param {IConfig?} configObject -
+     * CREATE THE USER CONFIGURATION |
+     * @param {IConfig?} configObject - An object that contains the configuration for the Sdk
      */
     constructor(configObject?: IConfig) {
         if (configObject?.shopId) {
@@ -41,7 +44,7 @@ export class Sdk {
         this.transaction = new Transaction(this._identity, this._host);
     }
 
-    // GETTERS AND SETTERS
+    // GETTERS AND SETTERS FOR PRIVATE PROPERTIES
     get shopId(): string | null {
         return this._identity.shopId;
     }

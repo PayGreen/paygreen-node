@@ -4,12 +4,11 @@ import { ApiResponse } from './models';
 
 /**
  * Main Builder with config constructor
- * @property {IIdentity} identity - identity inherited from SDK class to authorize access to API and build url
- * @property {IKey} key - private key inherited from SDK class
- * @property {string} host - host of Api inherited from SDK class based on mode of production
- * @property {ApiResponse} ApiResponse - class to normalize all Api Responses for better readibility
- * @property {object} axiosConfig - all parameters for axios instance
- * @property {any} axiosRequest -  create a new instance of axios with a custom config
+ * @property {IIdentity} identity - The identity inherited from SDK class to authorize access to API and build url
+ * @property {string} host - The host of Api inherited from SDK class based on mode of production
+ * @property {ApiResponse} ApiResponse - A class used to normalize all Api Responses for better readibility
+ * @property {object} axiosConfig - All parameters for axios instance
+ * @property {any} axiosRequest - An instance of axios with a custom config
  */
 export class MainBuilder {
     public identity: IIdentity;
@@ -23,10 +22,9 @@ export class MainBuilder {
     public axiosRequest: any;
 
     /**
-     * Build a complete path object
-     * @param {IKey} key - private key inherited from SDK class
-     * @param {IIdentity} identity - identity inherited from SDK class
-     * @param {string} host - host of Api inherited from SDK
+     * CREATE A COMPLETE PATH OBJECT |
+     * @param {IIdentity} identity - The identity inherited from SDK class
+     * @param {string} host - The host of Api inherited from SDK
      */
     constructor(identity: IIdentity, host: string) {
         this.identity = identity;
@@ -38,9 +36,10 @@ export class MainBuilder {
     }
 
     /**
-     * BUILD URL FOR MAIN API ROUTES |
-     * @param {string} url - basic url value for each route
-     * @returns {string} - new built complete url
+     * BUILD URL FOR MAIN ROUTES API |
+     * @description - Build URL for main routes of the Api
+     * @param {string} url - The basic url value for each route
+     * @returns {string} - The new built complete url
      */
     buildUrl = (url: string): string => {
         return '/api/' + this.identity.shopId + url;

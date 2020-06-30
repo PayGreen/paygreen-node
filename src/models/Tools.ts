@@ -4,8 +4,9 @@ import { validate, ValidatorOptions } from 'class-validator';
 export class Tools {
     /**
      * VERIFY DATA |
-     * @param {any} data - Object created with one of the model classes
-     * @returns {any} - New object with all errors informations or a string validation
+     * @description - Verify the data
+     * @param {any} data - The object created with one of the model classes
+     * @returns {any} - An object with all errors informations or a string validation
      */
     static verify = (data: any): any => {
         const validatorOptions: ValidatorOptions = {

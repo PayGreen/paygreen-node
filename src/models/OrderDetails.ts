@@ -2,12 +2,12 @@ import { Serializable, JsonProperty } from 'typescript-json-serializer';
 import { IsInt, IsISO8601 } from 'class-validator';
 
 /**
- * OrderDetails Model Class with methods to create and manage order details
- * @property {number?} cycle -
- * @property {number?} count -
- * @property {number?} day -
- * @property {string?} startAt - start date of subscription or xtime payment
- * @property {number?} firstAmount - first amount of payment
+ * OrderDetails Model Class with constructor to create and manage order details
+ * @property {number?} cycle - /
+ * @property {number?} count - /
+ * @property {number?} day - /
+ * @property {string?} startAt - The start date of subscription or xtime payment
+ * @property {number?} firstAmount - The first amount of payment
  */
 @Serializable()
 export class OrderDetails {

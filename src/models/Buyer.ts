@@ -3,13 +3,13 @@ import { IsEmail, IsISO31661Alpha2, MinLength } from 'class-validator';
 import { Country } from '../enums';
 
 /**
- * Buyer Model Class with methods to create and manage buyer informations
- * @property {string?} id - unique identifier of buyer
- * @property {string?} lastName - lastname of buyer
- * @property {string?} firstName - firstname of buyer
- * @property {string?} email - email of buyer
- * @property {Country?} country - name of buyer's country in ISO3166-1 format
- * @property {string?} companyName - company name if buyer is a company
+ * Buyer Model Class with constructor to create and manage buyer informations
+ * @property {string?} id - The unique identifier of buyer
+ * @property {string?} lastName - The lastname of buyer
+ * @property {string?} firstName - The firstname of buyer
+ * @property {string?} email - The email of buyer
+ * @property {Country?} country - The code of buyer's country in ISO3166 format
+ * @property {string?} companyName - The company name if buyer is a company
  */
 @Serializable()
 export class Buyer {

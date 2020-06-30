@@ -1,3 +1,6 @@
+/**
+ * @description - An enumeration of the complete list of all country ISO codes as described in the ISO 3166 (Alpha 2) international standard.
+ */
 export enum Country {
     'AD',
     'AE',

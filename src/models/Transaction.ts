@@ -12,20 +12,20 @@ import { OrderDetails } from './OrderDetails';
 import { ttlRegExp } from '../regExp/RegExp';
 
 /**
- * Transaction Model Class with methods to create and manage transaction data
- * @property {string?} orderId - (required) unique id of transaction
- * @property {number?} amount - (required) amount in EUR cents
- * @property {string?} currency - (required) currency
- * @property {string?} paymentType - payment type
- * @property {string?} returnedUrl - (optional) address to which the client should be redirected after the action has been performed
- * @property {string?} notifiedUrl - address to which PayGreen can make calls to update the status
- * @property {number?} idFingerprint - (optional) unique id to use Tree algorithm
- * @property {BuyerModel?} buyer - (for CASH and TOKENIZE)
- * @property {OrderDetailsModel?} orderDetails - (for SUBSCRIPTION and XTIME)
- * @property {object?} metadata -
- * @property {object?} eligibleAmount - (optional)
- * @property {object?} card - (optional)
- * @property {string?} ttl - time to live before transaction expire
+ * Transaction Model Class with constructor to create and manage transaction data
+ * @property {string?} orderId - (required) The unique id of transaction
+ * @property {number?} amount - (required) The amount in EUR cents
+ * @property {string?} currency - (required) The currency used, 'EUR' by default
+ * @property {string?} paymentType - The payment type, 'CB' by default
+ * @property {string?} returnedUrl - (optional) An address to which the client should be redirected after the action has been performed
+ * @property {string?} notifiedUrl - The address to which PayGreen can make calls to update the status
+ * @property {number?} idFingerprint - (optional) The unique id to use Tree algorithm
+ * @property {BuyerModel?} buyer - (required) An object that represent the buyer
+ * @property {OrderDetailsModel?} orderDetails - (for SUBSCRIPTION and XTIME only) An object that describe how debits will be performed if subscription or multiple payments
+ * @property {object?} metadata - /
+ * @property {object?} eligibleAmount - (optional) An object with maximum amount for each payment type available
+ * @property {object?} card - (optional) A card id if you want to use a card fingerprint
+ * @property {string?} ttl - (optional) The time to live before transaction expire
  */
 @Serializable()
 export class Transaction {
