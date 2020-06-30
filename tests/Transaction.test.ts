@@ -300,7 +300,7 @@ test('It causes an error during getDetails method', () => {
         });
 });
 
-test('it cancels a cash transaction', () => {
+test('It cancels a cash transaction', () => {
     const newTransaction = new Transaction();
     newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
     newTransaction.amount = 1450;
@@ -342,13 +342,13 @@ test('it cancels a cash transaction', () => {
         });
 });
 
-test('it causes error during cancellation', () => {
+test('It causes error during cancellation', () => {
     sdk.transaction.cancel('aaaaaaaaaa').then((response: IApiResponse) => {
         checkWrongResponse(response);
     });
 });
 
-test('it returns the transaction with the modified amount ', () => {
+test('It returns the transaction with the modified amount ', () => {
     const newTransaction = new Transaction();
     newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
     newTransaction.amount = 1450;
@@ -390,7 +390,7 @@ test('it returns the transaction with the modified amount ', () => {
         });
 });
 
-test('it causes an error during modification of unknow transaction', () => {
+test('It causes an error during modification of unknow transaction', () => {
     sdk.transaction
         .modify('aaaaaaaaaa', 9000)
         .then((response: IApiResponse) => {
