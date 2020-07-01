@@ -398,33 +398,11 @@ test('It causes an error during modification of unknow transaction', () => {
         });
 });
 
-test('It returns the transaction that was confirmed', () => {
-    const newTransaction = new Transaction();
-    newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
-    newTransaction.amount = 1450;
-    newTransaction.currency = 'EUR';
-    newTransaction.paymentType = 'CB';
-    newTransaction.notifiedUrl = 'http://example.com/retour-server';
-    newTransaction.buyer = buyer;
-    newTransaction.metadata = {
-        orderId: `oid${Math.floor(Math.random() * 10000)}`,
-        display: '0',
-    };
-    newTransaction.ttl = 'PT1M';
-
-    var transactionId: string = '';
-    return sdk.transaction
-        .createTokenize(newTransaction)
+test('It causes an error during confirmation of unknow transaction', () => {
+    sdk.transaction
+        .confirm('aaaaaaaaaa', 9000, 'Transaction validé !')
         .then((response: IApiResponse) => {
-            const { dataInfo } = response;
-            transactionId = dataInfo.data.id;
-        })
-        .finally(() => {
-            sdk.transaction
-                .confirm(transactionId, 1450, 'Transaction validée !')
-                .then((response: IApiResponse) => {
-                    console.log(response);
-                });
+            checkWrongResponse(response);
         });
 });
 
