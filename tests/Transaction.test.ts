@@ -274,23 +274,20 @@ test('It returns the details of the transaction', () => {
     };
     newTransaction.ttl = 'PT1M';
 
-    const transactionId: Array<string> = [];
+    var transactionId: string = '';
     sdk.transaction
         .createCash(newTransaction)
         .then((response: IApiResponse) => {
-            transactionId.push(response.dataInfo.data.id);
+            transactionId = response.dataInfo.data.id;
         })
         .finally(() => {
             sdk.transaction
-                .getDetails(transactionId[0])
+                .getDetails(transactionId)
                 .then((response: IApiResponse) => {
                     checkRightResponse(response);
                     const { dataInfo } = response;
 
-                    expect(dataInfo.data).toHaveProperty(
-                        'id',
-                        transactionId[0],
-                    );
+                    expect(dataInfo.data).toHaveProperty('id', transactionId);
                 });
         });
 });
@@ -345,6 +342,12 @@ test('it cancels a cash transaction', () => {
         });
 });
 
+test('it causes error during cancellation', () => {
+    sdk.transaction.cancel('aaaaaaaaaa').then((response: IApiResponse) => {
+        checkWrongResponse(response);
+    });
+});
+
 test('it returns the transaction with the modified amount ', () => {
     const newTransaction = new Transaction();
     newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
@@ -376,7 +379,7 @@ test('it returns the transaction with the modified amount ', () => {
                 })
                 .finally(() => {
                     sdk.transaction
-                        .getDetails(transactionId[0])
+                        .getDetails(transactionId)
                         .then((response: IApiResponse) => {
                             expect(response.dataInfo.data).toHaveProperty(
                                 'amount',
@@ -385,12 +388,6 @@ test('it returns the transaction with the modified amount ', () => {
                         });
                 });
         });
-});
-
-test('it causes error during cancellation', () => {
-    sdk.transaction.cancel('aaaaaaaaaa').then((response: IApiResponse) => {
-        checkWrongResponse(response);
-    });
 });
 
 test('it causes an error during modification of unknow transaction', () => {
