@@ -200,4 +200,39 @@ export class Transaction extends MainBuilder {
             })
             .catch(this.ApiResponse.formatError);
     };
+
+    /**
+     * CONFIRM | PUT /api/{identifiant}/payins/transaction/{transactionId}
+     * @param {string} transactionId - The unique id of a transaction
+     * @param {number} amount - The amount of the transaction, in EUR cents
+     * @param {string} message - The message for the confirmation
+     * @returns {Promise.<IApiResponse>} - An object with the confirmed transaction
+     */
+    confirm = (
+        transactionId: string,
+        amount: number,
+        message: string,
+    ): Promise<IApiResponse> => {
+        const urlExtension: string = '/' + transactionId;
+        const data = {
+            amount: amount,
+            message: message,
+        };
+
+        return this.axiosRequest
+            .put(this.buildUrl(Transaction.url) + urlExtension, data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then((res) => {
+                return this.ApiResponse.formatResponse(
+                    true,
+                    res.status,
+                    res.statusText,
+                    res.data,
+                );
+            })
+            .catch(this.ApiResponse.formatError);
+    };
 }
