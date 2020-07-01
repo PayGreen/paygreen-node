@@ -303,7 +303,7 @@ test('it causes an error during getDetails method', () => {
         });
 });
 
-test('it cancel a cash transaction', () => {
+test('it cancels a cash transaction', () => {
     const newTransaction = new Transaction();
     newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
     newTransaction.amount = 1450;
@@ -317,15 +317,15 @@ test('it cancel a cash transaction', () => {
     };
     newTransaction.ttl = 'PT1M';
 
-    const transactionId: Array<string> = [];
+    var transactionId: string = '';
     sdk.transaction
         .createCash(newTransaction)
         .then((response: IApiResponse) => {
-            transactionId.push(response.dataInfo.data.id);
+            transactionId = response.dataInfo.data.id;
         })
         .finally(() => {
             sdk.transaction
-                .cancel(transactionId[0])
+                .cancel(transactionId)
                 .then((response: IApiResponse) => {
                     checkRightResponse(response);
 
@@ -334,7 +334,7 @@ test('it cancel a cash transaction', () => {
                 })
                 .finally(() => {
                     sdk.transaction
-                        .getDetails(transactionId[0])
+                        .getDetails(transactionId)
                         .then((response: IApiResponse) => {
                             const { dataInfo } = response;
                             expect(dataInfo.data.result.status).toBe(
