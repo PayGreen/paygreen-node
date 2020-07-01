@@ -62,7 +62,7 @@ test('It returns the created cash transaction', () => {
         });
 });
 
-test('It cause an error during cash transaction', () => {
+test('It causes an error during cash transaction', () => {
     const newTransaction = new Transaction();
     // No orderId for this Transaction
     newTransaction.amount = 1450;
@@ -123,7 +123,7 @@ test('It returns the created subscription transaction', () => {
         });
 });
 
-test('It cause an error during subscription transaction', () => {
+test('It causes an error during subscription transaction', () => {
     const newTransaction = new Transaction();
     // No orderId for this Transaction
     newTransaction.amount = 1450;
@@ -184,7 +184,7 @@ test('It returns the created xTime transaction', () => {
         });
 });
 
-test('It cause an error during xTime transaction', () => {
+test('It causes an error during xTime transaction', () => {
     const newTransaction = new Transaction();
     // No orderId for this Transaction
     newTransaction.amount = 1450;
@@ -244,7 +244,7 @@ test('It returns the created tokenize transaction', () => {
         });
 });
 
-test('It cause an error during tokenize transaction', () => {
+test('It causes an error during tokenize transaction', () => {
     const newTransaction = new Transaction();
     // No orderId for this Transaction
     newTransaction.amount = 1450;

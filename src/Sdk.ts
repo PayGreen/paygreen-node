@@ -2,10 +2,10 @@ import { IConfig, IIdentity } from './interfaces';
 import { Host, Mode } from './enums';
 import { Transaction } from './resources';
 
-/** 
- * The Sdk Main Class to make APIPayGreen Calls. 
+/**
+ * The Sdk Main Class to make APIPayGreen Calls.
  * @property {Transaction} transaction - A class to use transactions related requests
-*/
+ */
 export class Sdk {
     public transaction: Transaction;
 
