@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES5",
     "declarationDir": "lib",  
-    "module": "commonjs",                     
+    "module": "ES2015",                     
     "declaration": true,                      
     "outDir": "lib",                         
     "composite": true,                    
