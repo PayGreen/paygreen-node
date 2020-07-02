@@ -260,7 +260,50 @@ test('it cause an error during tokenize transaction', () => {
         });
 });
 
-const checkRightResponse = (response: IApiResponse) => {
+test('it returns the details of the transaction', () => {
+    const newTransaction = new Transaction();
+    newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
+    newTransaction.amount = 1450;
+    newTransaction.currency = 'EUR';
+    newTransaction.paymentType = 'CB';
+    newTransaction.notifiedUrl = 'http://example.com/retour-server';
+    newTransaction.buyer = buyer;
+    newTransaction.metadata = {
+        orderId: `oid${Math.floor(Math.random() * 10000)}`,
+        display: '0',
+    };
+    newTransaction.ttl = 'PT1M';
+
+    const transactionId: Array<string> = [];
+    sdk.transaction
+        .createCash(newTransaction)
+        .then((response: IApiResponse) => {
+            transactionId.push(response.dataInfo.data.id);
+        })
+        .finally(() => {
+            sdk.transaction
+                .getDetails(transactionId[0])
+                .then((response: IApiResponse) => {
+                    checkRightResponse(response);
+                    const { dataInfo } = response;
+
+                    expect(dataInfo.data).toHaveProperty(
+                        'id',
+                        transactionId[0],
+                    );
+                });
+        });
+});
+
+test('it causes an error during getDetails method', () => {
+    return sdk.transaction
+        .getDetails('aaaaaaaaaa')
+        .then((response: IApiResponse) => {
+            checkWrongResponse(response);
+        });
+});
+
+const checkRightResponse = (response: any) => {
     const { success, dataInfo } = response;
     expect(success).toBe(true),
         expect(ApiResponse.isSuccessful(response)).toBe(true),
@@ -274,6 +317,8 @@ const checkWrongResponse = (response: IApiResponse) => {
         expect(
             ApiResponse.isInvalid(response) ||
                 ApiResponse.causedAnError(response),
-        ).toBe(true),
+        ).toBe(true);
+    if (dataInfo.success) {
         expect(dataInfo.success).toEqual(false);
+    }
 };

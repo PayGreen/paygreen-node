@@ -113,4 +113,29 @@ export class Transaction extends MainBuilder {
             })
             .catch(this.ApiResponse.formatError);
     };
+
+    /**
+     * GET DETAILS | GET /api/{identifiant}/payins/transaction/{transactionId}
+     * @param {string} transactionId - unique id of a transaction
+     * @returns {Promise.<Object>} Get object with transaction details
+     */
+    getDetails = (transactionId: string): Promise<IApiResponse> => {
+        const urlExtension: string = '/' + transactionId;
+
+        return this.axiosRequest
+            .get(this.buildUrl(Transaction.url) + urlExtension, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then((res) => {
+                return this.ApiResponse.formatResponse(
+                    true,
+                    res.status,
+                    res.statusText,
+                    res.data,
+                );
+            })
+            .catch(this.ApiResponse.formatError);
+    };
 }
