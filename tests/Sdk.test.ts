@@ -8,7 +8,7 @@ const config = {
 };
 const sdk = new Sdk(config);
 
-test('Sdk has properties _key & _identity', () => {
+test('Sdk has properties _identity', () => {
     expect(sdk).toHaveProperty('_identity');
 });
 
