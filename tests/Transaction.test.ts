@@ -303,6 +303,55 @@ test('it causes an error during getDetails method', () => {
         });
 });
 
+test('it cancels a cash transaction', () => {
+    const newTransaction = new Transaction();
+    newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
+    newTransaction.amount = 1450;
+    newTransaction.currency = 'EUR';
+    newTransaction.paymentType = 'CB';
+    newTransaction.notifiedUrl = 'http://example.com/retour-server';
+    newTransaction.buyer = buyer;
+    newTransaction.metadata = {
+        orderId: `oid${Math.floor(Math.random() * 10000)}`,
+        display: '0',
+    };
+    newTransaction.ttl = 'PT1M';
+
+    var transactionId: string = '';
+    sdk.transaction
+        .createCash(newTransaction)
+        .then((response: IApiResponse) => {
+            transactionId = response.dataInfo.data.id;
+        })
+        .finally(() => {
+            sdk.transaction
+                .cancel(transactionId)
+                .then((response: IApiResponse) => {
+                    checkRightResponse(response);
+
+                    const { dataInfo } = response;
+                    expect(dataInfo.data.result.status).toBe('CANCELLED');
+                })
+                .finally(() => {
+                    sdk.transaction
+                        .getDetails(transactionId)
+                        .then((response: IApiResponse) => {
+                            const { dataInfo } = response;
+                            expect(dataInfo.data.result.status).toBe(
+                                'CANCELLED',
+                            );
+                        });
+                });
+        });
+});
+
+test('it causes error during cancellation', () => {
+    sdk.transaction.cancel('aaaaaaaaaa').then((response: IApiResponse) => {
+        checkWrongResponse(response);
+    });
+});
+
+// CHECK'S METHODS
 const checkRightResponse = (response: any) => {
     const { success, dataInfo } = response;
     expect(success).toBe(true),
