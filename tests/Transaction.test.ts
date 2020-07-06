@@ -406,6 +406,57 @@ test('It causes an error during confirmation of unknow transaction', () => {
         });
 });
 
+test('It returns the refunded transaction details', () => {
+    const newTransaction = new Transaction();
+    newTransaction.orderId = `oid${Math.floor(Math.random() * 10000)}`;
+    newTransaction.amount = 1450;
+    newTransaction.currency = 'EUR';
+    newTransaction.paymentType = 'CB';
+    newTransaction.notifiedUrl = 'http://example.com/retour-server';
+    newTransaction.buyer = buyer;
+    newTransaction.metadata = {
+        orderId: `oid${Math.floor(Math.random() * 10000)}`,
+        display: '0',
+    };
+    newTransaction.ttl = 'PT1M';
+
+    var transactionId: string = '';
+    return sdk.transaction
+        .createCash(newTransaction)
+        .then((response: IApiResponse) => {
+            transactionId = response.dataInfo.data.id;
+        })
+        .finally(() => {
+            sdk.transaction
+                .refund(transactionId)
+                .then((response) => {
+                    checkRightResponse(response);
+                })
+                .finally(() => {
+                    sdk.transaction
+                        .getDetails(transactionId)
+                        .then((response) => {
+                            const { dataInfo } = response;
+
+                            checkRightResponse(response);
+                            expect(dataInfo.data.result).toHaveProperty(
+                                'status',
+                            ),
+                                expect(dataInfo.data.result.status).toBe(
+                                    'REFUNDED',
+                                );
+                        });
+                });
+        });
+});
+
+test('It causes an error during refund of unknow transaction', () => {
+    return sdk.transaction.refund('aaaaaaaaaa').then((response) => {
+        checkWrongResponse(response);
+        expect(ApiResponse.getErrorMessage(response)).toBe('Not Found');
+    });
+});
+
 /** CHECK RIGHT RESPONSE |
  * @description - Check that the Api response was a success
  * @param {IApiResponse} response - A response from Api formatted by ApiResponse.formatResponse()

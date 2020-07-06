@@ -235,4 +235,39 @@ export class Transaction extends MainBuilder {
             })
             .catch(this.ApiResponse.formatError);
     };
+
+    /**
+     * REFUND | DELETE /api/{identifiant}/payins/transaction/{transactionId}
+     * @param {string} transactionId - The unique id of a transaction
+     * @param {number?} amount - The amount of the transaction refunded in EUR cents, if empty then full refund
+     * @returns {Promise.<IApiResponse>} - An object with the confirmed transaction
+     */
+    refund = (
+        transactionId: string,
+        amount?: number,
+    ): Promise<IApiResponse> => {
+        const urlExtension: string = '/' + transactionId;
+        
+        const data = {};
+        if (amount) {
+            data['amount'] = amount;
+        }
+
+        return this.axiosRequest
+            .delete(this.buildUrl(Transaction.url) + urlExtension, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: { ...data },
+            })
+            .then((res) => {
+                return this.ApiResponse.formatResponse(
+                    true,
+                    res.status,
+                    res.statusText,
+                    res.data,
+                );
+            })
+            .catch(this.ApiResponse.formatError);
+    };
 }
