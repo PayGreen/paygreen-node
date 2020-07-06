@@ -2,14 +2,14 @@ import { MainBuilder } from '../MainBuilder';
 import { IApiResponse } from '../interfaces';
 
 /**
- * Transaction Class with all methods to request/modify Transactions infos
+ * PaymenType Class with method to get all payment types available
  * @property {string} url - The main url to build Api requests for this class
  */
 export class PaymentType extends MainBuilder {
     static url: string = '/paymenttype';
 
     /**
-     * GET PAYMENTTYPES | GET /api/{identifiant}/paymenttype
+     * GET PAYMENT TYPES | GET /api/{identifiant}/paymenttype
      * @param {string?} paymentType - The payment type you want to use
      * @param {string?} currency - The currency you want to use
      * @returns {Promise.<IApiResponse>} - An object that contains all payment type corresponding to search

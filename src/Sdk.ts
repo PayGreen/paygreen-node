@@ -5,6 +5,7 @@ import { PaymentType, Transaction } from './resources';
 /**
  * The Sdk Main Class to make APIPayGreen Calls.
  * @property {Transaction} transaction - A class to use transactions related requests
+ * @property {PaymentType} paymentType - A class to use requests related to payment types
  */
 export class Sdk {
     public transaction: Transaction;
