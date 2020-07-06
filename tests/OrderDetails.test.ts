@@ -25,7 +25,7 @@ test('Add complete details of an order with OrderDetails Model and returns the v
     });
 });
 
-test('deserialize received data to fit OrderDetails Model', () => {
+test('Deserialize received data to fit OrderDetails Model', () => {
     const orderDetails = new OrderDetails(40, 3, 0, date, 0);
     const finalData = deserialize(orderDetails, OrderDetails);
     expect(finalData).toMatchObject({

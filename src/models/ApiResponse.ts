@@ -4,12 +4,12 @@ import { IApiResponse } from '../interfaces';
 export class ApiResponse {
     /**
      *  GLOBAL RESPONSE FORMAT METHOD |
-     *  @description - normalize all Api Responses for better readibility
-     *  @param {boolean} success -
-     *  @param {number} status -
-     *  @param {string} message -
-     *  @param {any} data -
-     *  @returns {IApiResponse} - global object with complete response formatted
+     *  @description - Normalize all Api Responses for better readibility
+     *  @param {boolean} success - Tells if the Api responds successfully
+     *  @param {number} status - The status of the Api response
+     *  @param {string} message - The statusText of the Api response
+     *  @param {any} data - The data contained in the response
+     *  @returns {IApiResponse} - A global object with complete response formatted
      */
     static formatResponse = (
         success: boolean,
@@ -27,9 +27,9 @@ export class ApiResponse {
 
     /**
      * ERROR RESPONSE MODEL |
-     *  @description - format specific error response from Api
-     *  @param {any} error- error received from Api
-     *  @returns {IApiResponse} - global object with complete response formatted
+     *  @description - Format error response from Api
+     *  @param {any} error- The error received from Api
+     *  @returns {IApiResponse} - A global object with complete response formatted
      */
     static formatError = (error: any): IApiResponse => {
         return ApiResponse.formatResponse(
@@ -42,49 +42,49 @@ export class ApiResponse {
 
     /**
      * IS SUCCESSFUL
-     *  @description - verify if http response format = 2xx
-     *  @param {any} response - response formatted from Api
+     *  @description - Verify if http response status corresponds to 2xx
+     *  @param {IApiResponse} response - A response from Api formatted by formatResponse()
      *  @returns {boolean}
      */
-    static isSuccessful = (response: any): boolean => {
+    static isSuccessful = (response: IApiResponse): boolean => {
         return ApiResponse.getStatus(response).toString().charAt(0) === '2';
     };
 
     /**
      * IS INVALID
-     *  @description verify if http response format = 4xx
-     *  @param {any} response - response formatted from Api
+     *  @description - Verify if http response status corresponds to 4xx
+     *  @param {IApiResponse} response - A response from Api formatted by formatResponse()
      *  @returns {boolean}
      */
-    static isInvalid = (response: any): boolean => {
+    static isInvalid = (response: IApiResponse): boolean => {
         return ApiResponse.getStatus(response).toString().charAt(0) === '4';
     };
 
     /**
      * CAUSED AN ERROR
-     *  @description - verify if http response format = 5xx
-     *  @param {any} response - response formatted from Api
+     *  @description - Verify if http response status corresponds to 5xx
+     *  @param {IApiResponse} response - A response from Api formatted by formatResponse()
      *  @returns {boolean}
      */
-    static causedAnError = (response: any): boolean => {
+    static causedAnError = (response: IApiResponse): boolean => {
         return ApiResponse.getStatus(response).toString().charAt(0) === '5';
     };
 
     /**
      * GET ERROR MESSAGE |
-     *  @param {any} response - response formatted from Api
-     *  @returns {string} - error message details
+     *  @param {IApiResponse} response - A response from Api formatted by formatResponse()
+     *  @returns {string} - The details of the error
      */
-    static getErrorMessage = (response: any): string => {
+    static getErrorMessage = (response: IApiResponse): string => {
         return response.success ? 'no error' : response.dataInfo.message;
     };
 
     /**
      * GET STATUS |
-     *  @param {any} data - response formatted from Api
-     *  @returns {number} Get status of the http response
+     *  @param {IApiResponse} response - A response from Api formatted by formatResponse()
+     *  @returns {number} - Get status of the http response
      */
-    static getStatus = (response: any): number => {
+    static getStatus = (response: IApiResponse): number => {
         return response.status;
     };
 }

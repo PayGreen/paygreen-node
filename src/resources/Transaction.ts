@@ -5,15 +5,16 @@ import { IApiResponse } from '../interfaces';
 
 /**
  * Transaction Class with all methods to request/modify Transactions infos
- * @property {string} url - main url to build Api requests for this class
+ * @property {string} url - The main url to build Api requests for this class
  */
 export class Transaction extends MainBuilder {
     static url: string = '/payins/transaction';
 
     /**
      * CREATE CASH | POST /api/{identifiant}/payins/transaction/cash
-     * @param {TransactionModel} newTransaction - object containing all new transaction informations
-     * @returns {Promise.<IApiResponse>} Get object with new transaction created
+     * This type of transaction is used for cash payments
+     * @param {TransactionModel} newTransaction - A Transaction object containing all new transaction informations
+     * @returns {Promise.<IApiResponse>} - An object with the new transaction created
      */
     createCash = (newTransaction: TransactionModel): Promise<IApiResponse> => {
         const urlExtension: string = '/cash';
@@ -37,8 +38,9 @@ export class Transaction extends MainBuilder {
 
     /**
      * CREATE SUBSCRIPTION | POST /api/{identifiant}/payins/transaction/subscription
-     * @param {TransactionModel} newTransaction - object containing all new transaction informations
-     * @returns {Promise.<IApiResponse>} Get object with new transaction created
+     * This type of transaction is used for payments of subscription
+     * @param {TransactionModel} newTransaction - A Transaction object containing all new transaction informations
+     * @returns {Promise.<IApiResponse>} - An object with the new transaction created
      */
     createSubscription = (
         newTransaction: TransactionModel,
@@ -64,8 +66,9 @@ export class Transaction extends MainBuilder {
 
     /**
      * CREATE XTIME | POST /api/{identifiant}/payins/transaction/xtime
-     * @param {TransactionModel} newTransaction - object containing all new transaction informations
-     * @returns {Promise.<IApiResponse>} Get object with new transaction created
+     * This type of transaction is used for payments by instalment
+     * @param {TransactionModel} newTransaction - A Transaction object containing all new transaction informations
+     * @returns {Promise.<IApiResponse>} - An object with the new transaction created
      */
     createXTime = (newTransaction: TransactionModel): Promise<IApiResponse> => {
         const urlExtension: string = '/xtime';
@@ -89,8 +92,9 @@ export class Transaction extends MainBuilder {
 
     /**
      * CREATE TOKENIZE | POST /api/{identifiant}/payins/transaction/tokenize
-     * @param {TransactionModel} newTransaction - object containing all new transaction informations
-     * @returns {Promise.<IApiResponse>} Get object with new transaction created
+     * This type of transaction is used for payments on delivery
+     * @param {TransactionModel} newTransaction - A Transaction object containing all new transaction informations
+     * @returns {Promise.<IApiResponse>} - An object with the new transaction created
      */
     createTokenize = (
         newTransaction: TransactionModel,
@@ -116,8 +120,8 @@ export class Transaction extends MainBuilder {
 
     /**
      * GET DETAILS | GET /api/{identifiant}/payins/transaction/{transactionId}
-     * @param {string} transactionId - unique id of a transaction
-     * @returns {Promise.<IApiResponse>} Get object with transaction details
+     * @param {string} transactionId - The unique id of a transaction
+     * @returns {Promise.<IApiResponse>} - An object with the transaction details
      */
     getDetails = (transactionId: string): Promise<IApiResponse> => {
         const urlExtension: string = '/' + transactionId;
@@ -153,6 +157,38 @@ export class Transaction extends MainBuilder {
                     'Content-Type': 'text/plain',
                 },
                 id: transactionId,
+            })
+            .then((res) => {
+                return this.ApiResponse.formatResponse(
+                    true,
+                    res.status,
+                    res.statusText,
+                    res.data,
+                );
+            })
+            .catch(this.ApiResponse.formatError);
+    };
+
+    /**
+     * MODIFY | PATCH /api/{identifiant}/payins/transaction/{transactionId}
+     * @param {string} transactionId - The unique id of a transaction
+     * @param {number} newAmount - The new amount for the transaction
+     * @returns {Promise.<IApiResponse>} - An object with the modified transaction
+     */
+    modify = (
+        transactionId: string,
+        newAmount: number,
+    ): Promise<IApiResponse> => {
+        const urlExtension: string = '/' + transactionId;
+        const data = {
+            amount: newAmount,
+        };
+
+        return this.axiosRequest
+            .patch(this.buildUrl(Transaction.url) + urlExtension, data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             })
             .then((res) => {
                 return this.ApiResponse.formatResponse(

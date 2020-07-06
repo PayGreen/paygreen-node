@@ -3,6 +3,7 @@ node_modules/
 
 # directories
 lib/
+coverage/
 
 # files
 .env*

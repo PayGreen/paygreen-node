@@ -32,7 +32,7 @@ test('Add complete profile of a buyer with Buyer Model and returns the validatio
     });
 });
 
-test('deserialize received data to fit Buyer Model', () => {
+test('Deserialize received data to fit Buyer Model', () => {
     const buyer = new Buyer(
         'bid4643',
         'Lefebvre',
