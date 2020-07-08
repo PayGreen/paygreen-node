@@ -7,13 +7,13 @@ Here you will find all informations to create a New OrderDetails Object with our
 
 ## Object expected by API PayGreen
 
-| Name        | Type       | Description                          |
-| ----------- | ---------- | ------------------------------------ |
-| cycle       | `number`   | The unique ID of the buyer           |
-| count       | `number`   | The lastname of the buyer            |
-| day         | `number`   | The firstname of the buyer           |
-| startAt     | `string`   | The email of the buyer               |
-| firstAmount | `number`   | The country where the buyer lives    |
+| Name        | Type     | Description                                     |
+| ----------- | -------- | ----------------------------------------------- |
+| cycle       | `number` | (Required) The unique ID of the buyer           |
+| count       | `number` | (Required) The lastname of the buyer            |
+| day         | `number` | (Required) The firstname of the buyer           |
+| startAt     | `string` | (Required) The email of the buyer               |
+| firstAmount | `number` | (Required) The country where the buyer lives    |
 
 ```JSON
 {

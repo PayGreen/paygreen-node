@@ -11,11 +11,11 @@ All types of Transaction are created the same way:
 
 - Then you can pass this object to one of the following methods. Each one of them create a specific type of transaction: CASH, SUBSCRIPTION, XTIME and TOKENIZE. Some kind of transaction need specific informations inside the Transaction object, for example: SUBSCRIPTION and XTIME need an orderDetails field inside the Transaction object to work.
 
-## transaction.createCash()
+## createCash()
 
-| Param          | Type          | Description                                                      |
-| -------------- | ------------- | ---------------------------------------------------------------- |
-| newTransaction | `Transaction` | A Transaction object containing all new transaction informations |
+| Param          | Type          | Description                                                                 |
+| -------------- | ------------- | --------------------------------------------------------------------------- |
+| newTransaction | `Transaction` | (Required) A Transaction object containing all new transaction informations |
 
 - To create a new Transaction object, we highly recommend you to use our Transaction Model Class to ensure full compatibility with the API. [Try it here](transaction-data.md)
 
@@ -41,11 +41,11 @@ All types of Transaction are created the same way:
 }
 ```
 
-## transaction.createSubscription()
+## createSubscription()
 
-| Param          | Type          | Description                                                      |
-| -------------- | ------------- | ---------------------------------------------------------------- |
-| newTransaction | `Transaction` | A Transaction object containing all new transaction informations |
+| Param          | Type          | Description                                                                 |
+| -------------- | ------------- | --------------------------------------------------------------------------- |
+| newTransaction | `Transaction` | (Required) A Transaction object containing all new transaction informations |
 
 - To create a new Transaction object, we highly recommend you to use our Transaction Model Class to ensure full compatibility with the API. [Try it here](transaction-data.md)
 
@@ -73,11 +73,11 @@ All types of Transaction are created the same way:
 }
 ```
 
-## transaction.createXTime()
+## createXTime()
 
-| Param          | Type          | Description                                                      |
-| -------------- | ------------- | ---------------------------------------------------------------- |
-| newTransaction | `Transaction` | A Transaction object containing all new transaction informations |
+| Param          | Type          | Description                                                                 |
+| -------------- | ------------- | --------------------------------------------------------------------------- |
+| newTransaction | `Transaction` | (Required) A Transaction object containing all new transaction informations |
 
 - To create a new Transaction object, we highly recommend you to use our Transaction Model Class to ensure full compatibility with the API. [Try it here](transaction-data.md)
 
@@ -105,11 +105,11 @@ All types of Transaction are created the same way:
 }
 ```
 
-## transaction.createTokenize()
+## createTokenize()
 
-| Param          | Type          | Description                                                      |
-| -------------- | ------------- | ---------------------------------------------------------------- |
-| newTransaction | `Transaction` | A Transaction object containing all new transaction informations |
+| Param          | Type          | Description                                                                 |
+| -------------- | ------------- | --------------------------------------------------------------------------- |
+| newTransaction | `Transaction` | (Required) A Transaction object containing all new transaction informations |
 
 - To create a new Transaction object, we highly recommend you to use our Transaction Model Class to ensure full compatibility with the API. [Try it here](transaction-data.md)
 

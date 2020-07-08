@@ -9,14 +9,14 @@ Here you will find all informations to create a New Buyer Object with our Buyer 
 
 ## Object expected by API PayGreen
 
-| Name        | Type     | Description                          |
-| ----------- | -------- | ------------------------------------ |
-| id          | `string` | The unique ID of the buyer           |
-| lastName    | `string` | The lastname of the buyer            |
-| firstName   | `string` | The firstname of the buyer           |
-| email       | `string` | The email of the buyer               |
-| country     | `enum`   | The country where the buyer lives    |
-| companyName | `string` | The name of the company of the buyer |
+| Name        | Type     | Description                                      |
+| ----------- | -------- | ------------------------------------------------ |
+| id          | `string` | (Required) The unique ID of the buyer            |
+| lastName    | `string` | (Required) The lastname of the buyer             |
+| firstName   | `string` | (Required) The firstname of the buyer            |
+| email       | `string` | (Required) The email of the buyer                |
+| country     | `enum`   | (Required) The country where the buyer lives     |
+| companyName | `string` | (Optionnal) The name of the company of the buyer |
 
 ```JSON
 {

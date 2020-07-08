@@ -42,7 +42,11 @@ class Footer extends React.Component {
                     <div>
                         <h5>Docs</h5>
 
-                        <a href={this.docUrl('create-transaction', this.props.language)}>
+                        <a href={this.docUrl('start-sdk')}>
+                            Set Up the Sdk
+                        </a>
+
+                        <a href={this.docUrl('create-transaction')}>
                             First API Requests
                         </a>
                     </div>
@@ -55,7 +59,7 @@ class Footer extends React.Component {
                             target="_blank"
                             rel="noreferrer noopener"
                         >
-                            API PayGreen by Paygreen
+                            PayGreen API by Paygreen
                         </a>
 
                         <a
@@ -63,7 +67,7 @@ class Footer extends React.Component {
                             target="_blank"
                             rel="noreferrer noopener"
                         >
-                            Paygreen
+                            PayGreen
                         </a>
                     </div>
 

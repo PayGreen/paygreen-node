@@ -1,6 +1,6 @@
 ---
 id: start-sdk
-title: Import Sdk
+title: Import SDK
 ---
 
 This short tutorial will set you up to start using API PayGreen SDK in a few minutes.
@@ -29,7 +29,7 @@ const { Sdk } = require('paygreen-node');
 const sdk = new Sdk();
 ```
 
-Here, you have your first instance of the Sdk. Now to access to API PayGreen, it needs to be configured with your account informations.
+Here, you have your first instance of the SDK. Now to access to API PayGreen, it needs to be configured with your account informations.
 
 - Accounts are created by PayGreen only. To create an account, please email us at tech@paygreen.fr to obtain your ids. You will be provided with a shop id and a private key.
 

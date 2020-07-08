@@ -5,11 +5,11 @@ title: Handle a transaction
 
 Here you will have all informations to manage your transactions.
 
-## Get details of a transaction
+## getDetails()
 
-| Param         | Type   | Description                     |
-| ------------- | ------ | ------------------------------- |
-| transactionId | string | The unique id of the transation |
+| Param         | Type     | Description                                |
+| ------------- | -------- | ------------------------------------------ |
+| transactionId | `string` | (Required) The unique id of the transation |
 
 - Return a Promise with an object containing the transaction details.
 
@@ -33,12 +33,12 @@ Here you will have all informations to manage your transactions.
 }
 ```
 
-## Modify a transaction
+## modify()
 
-| Param         | Type   | Description                       |
-| ------------- | ------ | --------------------------------- |
-| transactionId | string | The unique id of the transation   |
-| newAmount     | number | The new amount of the transaction |
+| Param         | Type     | Description                                  |
+| ------------- | -------- | -------------------------------------------- |
+| transactionId | `string` | (Required) The unique id of the transation   |
+| newAmount     | `number` | (Required) The new amount of the transaction |
 
 - Return a Promise with an object containing the modified transaction details.
 
@@ -62,12 +62,12 @@ Here you will have all informations to manage your transactions.
 }
 ```
 
-## Refund a transaction
+## refund()
 
-| Param         | Type    | Description                                                                                  |
-| ------------- | ------- | -------------------------------------------------------------------------------------------- |
-| transactionId | string  | The unique id of the transation                                                              |
-| amount        | number? | (Optionnal) The amount refunded in EUR cents, if undefined the transaction is fully refunded |
+| Param         | Type     | Description                                                                                  |
+| ------------- | -------- | -------------------------------------------------------------------------------------------- |
+| transactionId | `string` | (Required) The unique id of the transation                                                   |
+| amount        | `number` | (Optionnal) The amount refunded in EUR cents, if undefined the transaction is fully refunded |
 
 - Return a Promise with an object containing the refunded transaction details.
 
@@ -91,13 +91,13 @@ Here you will have all informations to manage your transactions.
 }
 ```
 
-## Confirm a transaction
+## confirm()
 
-| Param         | Type   | Description                     |
-| ------------- | ------ | ------------------------------- |
-| transactionId | string | The unique id of the transation |
-| amount        | number | The amount of the transaction   |
-| message       | string | The validation message          |
+| Param         | Type     | Description                                |
+| ------------- | -------- | ------------------------------------------ |
+| transactionId | `string` | (Required) The unique id of the transation |
+| amount        | `number` | (Required) The amount of the transaction   |
+| message       | `string` | (Required) The validation message          |
 
 - Return a Promise with an object containing the confirmed transaction details.
 
@@ -121,11 +121,11 @@ Here you will have all informations to manage your transactions.
 }
 ```
 
-## Cancel a transaction
+## cancel()
 
-| Param         | Type   | Description                     |
-| ------------- | ------ | ------------------------------- |
-| transactionId | string | The unique id of the transation |
+| Param         | Type     | Description                                |
+| ------------- | -------- | ------------------------------------------ |
+| transactionId | `string` | (Required) The unique id of the transation |
 
 - Return a Promise with an object containing the cancelled transaction details.
 

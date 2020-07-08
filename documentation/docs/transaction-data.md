@@ -11,19 +11,19 @@ Here you will find all informations to create a New Transaction Object with our 
 
 | Name           | Type           | Description                                                                                                                 |
 | -------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| orderId        | `string`       | (required) The unique id of transaction                                                                                     |
-| amount         | `number`       | (required) The amount in EUR cents                                                                                          |
-| currency       | `string`       | (required) The currency used, 'EUR' by default                                                                              |
-| paymentType    | `string`       | The payment type, 'CB' by default                                                                                           |
-| returnedUrl    | `string`       | (optional) An address to which the client should be redirected after the action has been performed                          |
-| notifiedUrl    | `string`       | The address to which PayGreen can make calls to update the status                                                           |
-| idFingerprint  | `number`       | (optional) The unique id to use Tree algorithm                                                                              |
-| buyer          | `Buyer`        | (required) An object that represent the buyer                                                                               |
+| orderId        | `string`       | (Required) The unique id of transaction                                                                                     |
+| amount         | `number`       | (Required) The amount in EUR cents                                                                                          |
+| currency       | `string`       | (Required) The currency used, 'EUR' by default                                                                              |
+| paymentType    | `string`       | (Optional) The payment type, 'CB' by default                                                                                           |
+| returnedUrl    | `string`       | (Optional) An address to which the client should be redirected after the action has been performed                          |
+| notifiedUrl    | `string`       | (Required) The address to which PayGreen can make calls to update the status                                                           |
+| idFingerprint  | `number`       | (Optional) The unique id to use Tree algorithm                                                                              |
+| buyer          | `Buyer`        | (Required) An object that represent the buyer                                                                               |
 | orderDetails   | `OrderDetails` | (for SUBSCRIPTION and XTIME only) An object that describe how debits will be performed if subscription or multiple payments |
 | metadata       | `object`       | /                                                                                                                           |
-| eligibleAmount | `object`       | (optional) An object with maximum amount for each payment type available                                                    |
-| card           | `object`       | (optional) A card id if you want to use a card fingerprint                                                                  |
-| ttl            | `string`       | (optional) The time to live before transaction expire                                                                       |
+| eligibleAmount | `object`       | (Optional) An object with maximum amount for each payment type available                                                    |
+| card           | `object`       | (Optional) A card id if you want to use a card fingerprint                                                                  |
+| ttl            | `string`       | (Optional) The time to live before transaction expire                                                                       |
 
 ```JSON
 {
@@ -60,27 +60,25 @@ const newTransaction = new Transaction();
 import { Buyer, OrderDetails, Transaction } from 'paygreen-node';
 
 const newTransaction = new Transaction(
-    'orderId': {{$timestamp}},
-    'amount': 1450,
-    'currency': 'EUR',
-    'paymentType': 'CB',
-    'returned_url': 'http://example.com/retour-client',
-    'notified_url': 'http://example.com/retour-server',
-    'idFingerprint': 0,
-    'buyer': new Buyer(),
-    'orderDetails': new OrderDetails(),
-    'card': {
-        'token': 'abcdef1234567890',
-    },
-    'metadata':{
-        'orderId':{{$timestamp}},
+    new Date().getTime(),
+    1450,
+    'EUR',
+    'CB',
+    'http://example.com/retour-client',
+    'http://example.com/retour-server',
+    0,
+    new Buyer(),
+    new OrderDetails(),
+    { 'token': 'abcdef1234567890' },
+    {
+        'orderId': new Date().getTime(),
         'display':'0'
     },
-    'eligibleAmount': {
+    {
         'ANCV': '1000',
         'RESTOFLASH': '0'
     },
-    'ttl':'PT30M',
+    'PT30M',
 );
 
 ```

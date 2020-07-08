@@ -3,26 +3,22 @@ id: get-paymenttype
 title: Know the payment types availables
 ---
 
-Here you will have all informations to know which payment types are availables.
+Here you will have all informations to know how to retrieve payment types availables.
 
-## Get payment types availables
+## getPaymentType()
 
-| Param         | Type   | Description                     |
-| ------------- | ------ | ------------------------------- |
-| transactionId | string | The unique id of the transation |
-
-- Return a Promise with an object containing the transaction details.
+- Return a Promise with an object containing all the payment types availables.
 
 ```Javascript
-    return sdk.transaction
-        .getDetails(transactionId)
+    return sdk.paymentType
+        .getPaymentType()
         .then((res) => {
             console.log(res)
         });
 ```
 
 - API Response
-    The \dataInfo object inside API response contains a \data object with the transaction details.
+    The \dataInfo object inside API response contains a \data object with all the payment types availables.
 
 ```JSON
 {

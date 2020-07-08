@@ -113,7 +113,7 @@ class Index extends React.Component {
                 {[
                     {
                         content:
-                            'Our sdk is hosted on NPM, so you can simply use : \n' +
+                            'Our SDK is hosted on NPM, so you can simply use: \n' +
                             '```sh\n' +
                             'npm i paygreen-node --save\n' +
                             '```\n',
@@ -128,7 +128,7 @@ class Index extends React.Component {
                 {[
                     {
                         content:
-                            "You can check our repository [`here`](#). Don't hesitate to contact tech@paygreen.fr (or create an [`Issue`](#) on github) for any questions. </br>For more information about API Green, please visit [`the official API documentation`](https://paygreen.fr/documentation/api-documentation-categorie?cat=paiement).",
+                            "You can check our repository [`here`](#). Don't hesitate to contact tech@paygreen.fr (or create an [`Issue`](#) on GitHub) for any questions. </br>For more information about API PayGreen, please visit [the official API documentation](https://paygreen.fr/documentation/api-documentation-categorie?cat=paiement).",
                         title: 'Github Repository',
                     },
                 ]}

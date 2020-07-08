@@ -9,9 +9,9 @@ We have created a bunch of methods to help you optimizing the data created to be
 
 ### verify()
 
-| Param | Type     | Description                                  |
-| ----- | -------- | -------------------------------------------- |
-| data  | `Object` | Object created with one of the model classes |
+| Param | Type     | Description                                             |
+| ----- | -------- | ------------------------------------------------------- |
+| data  | `object` | (Required) Object created with one of the model classes |
 
 - Easily verify the data built with model classes (`Buyer`,`OrderDetails`, `Transaction`) before sending it to API. This method verifies if there is no field left empty when all of them are required and check specific value validity like email for `Buyer`.
 
@@ -67,11 +67,11 @@ Some API responses can be huge or complex with specific errors, for more efficie
 
 ### isSuccessful()
 
-| Param    | Type          | Description                              |
-| -------- | ------------- | ---------------------------------------- |
-| response | `ApiResponse` | Response formatted with format's methods |
+| Param    | Type          | Description                                         |
+| -------- | ------------- | --------------------------------------------------- |
+| response | `ApiResponse` | (Required) Response formatted with format's methods |
 
-- Verify if http response format = 2xx
+- Verify if HTTP response format = 2XX.
 
 ```Javascript
     import { ApiResponse } from 'paygreen-node';
@@ -81,11 +81,11 @@ Some API responses can be huge or complex with specific errors, for more efficie
 
 ### isInvalid()
 
-| Param    | Type          | Description                              |
-| -------- | ------------- | ---------------------------------------- |
-| response | `ApiResponse` | Response formatted with format's methods |
+| Param    | Type          | Description                                         |
+| -------- | ------------- | --------------------------------------------------- |
+| response | `ApiResponse` | (Required) Response formatted with format's methods |
 
-- Verify if http response format = 4xx
+- Verify if HTTP response format = 4XX.
 
 ```Javascript
     import { ApiResponse } from 'paygreen-node';
@@ -95,11 +95,11 @@ Some API responses can be huge or complex with specific errors, for more efficie
 
 ### causedAnError()
 
-| Param    | Type          | Description                              |
-| -------- | ------------- | ---------------------------------------- |
-| response | `ApiResponse` | Response formatted with format's methods |
+| Param    | Type          | Description                                         |
+| -------- | ------------- | --------------------------------------------------- |
+| response | `ApiResponse` | (Required) Response formatted with format's methods |
 
-- Verify if http response format = 5xx
+- Verify if HTTP response format = 5XX.
 
 ```Javascript
     import { ApiResponse } from 'paygreen-node';
@@ -109,11 +109,11 @@ Some API responses can be huge or complex with specific errors, for more efficie
 
 ### getStatus()
 
-| Param    | Type          | Description                              |
-| -------- | ------------- | ---------------------------------------- |
-| response | `ApiResponse` | Response formatted with format's methods |
+| Param    | Type          | Description                                         |
+| -------- | ------------- | --------------------------------------------------- |
+| response | `ApiResponse` | (Required) Response formatted with format's methods |
 
-- Get status of the http response
+- Get status of the HTTP response.
 
 ```Javascript
     import { ApiResponse } from 'paygreen-node';
@@ -123,11 +123,11 @@ Some API responses can be huge or complex with specific errors, for more efficie
 
 ### getErrorMessage()
 
-| Param    | Type          | Description                              |
-| -------- | ------------- | ---------------------------------------- |
-| response | `ApiResponse` | Response formatted with format's methods |
+| Param    | Type          | Description                                         |
+| -------- | ------------- | --------------------------------------------------- |
+| response | `ApiResponse` | (Required) Response formatted with format's methods |
 
-- Get error message details
+- Get error message details.
 
 ```Javascript
     import { ApiResponse } from 'paygreen-node';
