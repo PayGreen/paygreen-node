@@ -27,7 +27,7 @@ We have created a bunch of methods to help you optimizing the data created to be
 - If all values are ok, you will received a simple string :
 
 ```Javascript
-    'Validation succeed !'
+    'Validation succeed'
 ```
 
 - In case of error, the method will return an array containing the name of the field concerned and the error detailed. Here, we have built a new Buyer but left the field 'lastName' empty.
@@ -47,7 +47,11 @@ We have created a bunch of methods to help you optimizing the data created to be
     return Tools.verify(Buyer).then((res) => {
         console.log(res)
     });
+```
 
+- The response when a field doesn't match the validator
+
+```Javascript
     res = [
         ValidationError {
             value: '',

@@ -25,25 +25,6 @@ Here you will find all informations to create a New Transaction Object with our 
 | card           | `object`       | (Optional) A card id if you want to use a card fingerprint                                                                  |
 | ttl            | `string`       | (Optional) The time to live before transaction expire                                                                       |
 
-```JSON
-{
-    orderId: string,
-    amount: number,
-    currency: string,
-    paymentType: string,
-    returnedUrl: enum,
-    notifiedUrl: string,
-    idFingerprint: number,
-    buyer: Buyer,
-    orderDetails: OrderDetails,
-    metadata: object,
-    eligibleAmount: object,
-    card: object,
-    ttl: string,
-}
-
-```
-
 ## Add one information at a time
 
 ```Javascript

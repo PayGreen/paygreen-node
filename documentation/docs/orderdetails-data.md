@@ -15,17 +15,6 @@ Here you will find all informations to create a New OrderDetails Object with our
 | startAt     | `string` | (Required) The email of the buyer               |
 | firstAmount | `number` | (Required) The country where the buyer lives    |
 
-```JSON
-{
-    cycle: number,
-    count: number,
-    day: number,
-    startAt: string,
-    firstAmount: number,
-}
-
-```
-
 ## Add one information at a time
 
 ```Javascript

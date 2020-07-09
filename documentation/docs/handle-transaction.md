@@ -64,10 +64,10 @@ Here you will have all informations to manage your transactions.
 
 ## refund()
 
-| Param         | Type     | Description                                                                                  |
-| ------------- | -------- | -------------------------------------------------------------------------------------------- |
-| transactionId | `string` | (Required) The unique id of the transation                                                   |
-| amount        | `number` | (Optionnal) The amount refunded in EUR cents, if undefined the transaction is fully refunded |
+| Param         | Type     | Description                                                                                 |
+| ------------- | -------- | ------------------------------------------------------------------------------------------- |
+| transactionId | `string` | (Required) The unique id of the transation                                                  |
+| amount        | `number` | (Optional) The amount refunded in EUR cents, if undefined the transaction is fully refunded |
 
 - Return a Promise with an object containing the refunded transaction details.
 

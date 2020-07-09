@@ -141,20 +141,20 @@ class Index extends React.Component {
                     {
                         content:
                             'Simple methods that support all API PayGreen endpoints.',
-                        image: `${baseUrl}img/leaf.svg`,
+                        image: `${baseUrl}img/cb.svg`,
                         imageAlign: 'top',
                         title: 'Easy API Calls',
                     },
                     {
                         content:
                             'Quickly and safely generate data for post/put calls.',
-                        image: `${baseUrl}img/leaf.svg`,
+                        image: `${baseUrl}img/cb.svg`,
                         imageAlign: 'top',
                         title: 'Data Building Models',
                     },
                     {
                         content: 'Handle and convert data received from API.',
-                        image: `${baseUrl}img/leaf.svg`,
+                        image: `${baseUrl}img/cb.svg`,
                         imageAlign: 'top',
                         title: 'Extra Tools',
                     },

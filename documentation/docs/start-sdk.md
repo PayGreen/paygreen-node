@@ -36,7 +36,7 @@ Here, you have your first instance of the SDK. Now to access to API PayGreen, it
 ### You can provide these informations one at a time
 
 ```Javascript
-sdk.shopId(config.shopId);
+sdk.shopId("1234abcdef");
 ```
 
 ### Or during instanciation through a configuration object
@@ -45,11 +45,34 @@ sdk.shopId(config.shopId);
 import { Mode, Sdk } from 'paygreen-node';
 
 const localConfig = {
+    shopId: "1234abcdef",
+    privateKey: "1234-abcd-abcd-1234abcd",
+    mode: Mode.DEV,
+    host: "http://dev.paygreen.fr",
+};
+
+const sdk = new Sdk(localConfig);
+```
+
+- You can also use a dotenv environment file to load your environment variables and then, place them in the config object.
+
+```dotenv
+SDK_SHOPID = your unique ID here
+SDK_KEY = your private key here
+SDK_MODE = choose between DEV, PREPROD and PROD (if no mode provided, default mode will be PROD and the requests will automatically be made with url http://localhost)
+SDK_HOST = your url here (if no host provided, the requests will automatically be made with url http://localhost)
+```
+
+```Javascript
+require('dotenv').config('/.env');
+import { Mode } from "paygreen-node";
+
+const localConfig = {
     shopId: process.env.SDK_SHOPID,
     privateKey: process.env.SDK_KEY,
     mode: process.env.SDK_MODE ? Mode[process.env.SDK_MODE] : null,
     host: process.env.SDK_HOST || null,
 };
 
-const sdk = new Sdk(localConfig);
+module.exports = { localConfig };
 ```

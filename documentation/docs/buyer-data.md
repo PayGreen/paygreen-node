@@ -16,19 +16,7 @@ Here you will find all informations to create a New Buyer Object with our Buyer 
 | firstName   | `string` | (Required) The firstname of the buyer            |
 | email       | `string` | (Required) The email of the buyer                |
 | country     | `enum`   | (Required) The country where the buyer lives     |
-| companyName | `string` | (Optionnal) The name of the company of the buyer |
-
-```JSON
-{
-    id: string,
-    lastName: string,
-    firstName: string,
-    email: string,
-    country: enum,
-    companyName: string,
-}
-
-```
+| companyName | `string` | (Optional) The name of the company of the buyer  |
 
 ## Add one information at a time
 
