@@ -28,8 +28,37 @@ Here you will have all informations to manage your transactions.
 {
     success: true,
     status: 200,
-    message: 'OK',
-    dataInfo: any,
+    message: "OK",
+    dataInfo: {
+        code: 0,
+        data: {
+            id: "tr9558da6e3ed2332289a764f1a754b8c9",
+            orderId: "oid5762",
+            amount: 1450,
+            currency: "EUR",
+            type: "RECURRING",
+            paymentType: "CB",
+            url:
+            "http://sandbox.paygreen.fr/payment/execute/tr9558da6e3ed2332289a764f1a754b8c9",
+            result: {
+                paymentErrorStatus: "",
+                status: "PENDING",
+                threeDSecureStatus: "3DS_SUCCESSED",
+            },
+            card: Object,
+            buyer: Buyer,
+            orderDetails: OrderDetails,
+            metadata: Object,
+            eligibleAmount: Object,
+            idFingerprint: 0,
+            createdAt: "2020-07-09T17:46:01+02:00",
+            valueAt: "2020-07-09T17:46:01+02:00",
+            answeredAt: 0,
+            ttl: "PT10M",
+        },
+        message: "",
+        success: true,
+    },
 }
 ```
 
@@ -58,7 +87,34 @@ Here you will have all informations to manage your transactions.
     success: true,
     status: 200,
     message: 'OK',
-    dataInfo: any,
+    dataInfo: {
+        code: 0
+        data:
+            amount: 1000,
+            answeredAt: 0,
+            buyer: Buyer,
+            orderDetails: OrderDetails,
+            card: Object,
+            createdAt: "2020-07-09T17:55:11+02:00",
+            currency: "EUR",
+            eligibleAmount: Object,
+            id: "trc8814d2556090b12ea0d8b50bba5afda",
+            idFingerprint: 0,
+            metadata: Object,
+            orderId: "1594310111784",
+            paymentType: "CB",
+            result: {
+                paymentErrorStatus: "",
+                status: "PENDING",
+                threeDSecureStatus: "3DS_SUCCESSED",
+            },
+            ttl: "PT10M",
+            type: "RECURRING",
+            url: "http://sandbox.paygreen.fr/payment/execute/trc8814d2556090b12ea0d8b50bba5afda",
+            valueAt: "2020-07-09T17:55:11+02:00",
+        },
+        message: "",
+        success: true,
 }
 ```
 
@@ -87,7 +143,35 @@ Here you will have all informations to manage your transactions.
     success: true,
     status: 200,
     message: 'OK',
-    dataInfo: any,
+    dataInfo: {
+        code: 0,
+        data: {
+            amount: 1000,
+            answeredAt: "2020-07-09T17:59:24+02:00",
+            buyer: Buyer,
+            orderDetails: OrderDetails,
+            card: Object,
+            createdAt: "2020-07-09T17:55:11+02:00",
+            currency: "EUR",
+            eligibleAmount: Object,
+            id: "trc8814d2556090b12ea0d8b50bba5afda",
+            idFingerprint: 0,
+            metadata: Object,
+            orderId: "1594310111784",
+            paymentType: "CB",
+            result: {
+                paymentErrorStatus: "",
+                status: "REFUNDED",
+                threeDSecureStatus: "3DS_SUCCESSED",
+            },
+            ttl: "0",
+            type: "RECURRING",
+            url: "http://sandbox.paygreen.fr/payment/execute/trc8814d2556090b12ea0d8b50bba5afda",
+            valueAt: "2020-07-09T17:59:24+02:00",
+        }
+        message: "",
+        success: true,
+    },
 }
 ```
 
@@ -117,7 +201,35 @@ Here you will have all informations to manage your transactions.
     success: true,
     status: 200,
     message: 'OK',
-    dataInfo: any,
+    dataInfo: {
+        code: 0,
+        data: {
+            amount: 1000,
+            answeredAt: "2020-07-09T17:59:24+02:00",
+            buyer: Buyer,
+            orderDetails: OrderDetails,
+            card: Object,
+            createdAt: "2020-07-09T17:55:11+02:00",
+            currency: "EUR",
+            eligibleAmount: Object,
+            id: "trc8814d2556090b12ea0d8b50bba5afda",
+            idFingerprint: 0,
+            metadata: Object,
+            orderId: "1594310111784",
+            paymentType: "CB",
+            result: {
+                paymentErrorStatus: "",
+                status: "SUCCESSED",
+                threeDSecureStatus: "3DS_SUCCESSED",
+            },
+            ttl: "0",
+            type: "RECURRING",
+            url: "http://sandbox.paygreen.fr/payment/execute/trc8814d2556090b12ea0d8b50bba5afda",
+            valueAt: "2020-07-09T17:59:24+02:00",
+        }
+        message: "",
+        success: true,
+    },
 }
 ```
 
@@ -145,6 +257,32 @@ Here you will have all informations to manage your transactions.
     success: true,
     status: 200,
     message: 'OK',
-    dataInfo: any,
+    dataInfo: {
+        code: 0,
+        data: {
+            amount: 1000,
+            answeredAt: 0,
+            buyer: Buyer,
+            orderDetails: OrderDetails,
+            card: Object,
+            createdAt: "2020-07-09T18:11:18+02:00",
+            currency: "EUR",
+            eligibleAmount: Object,
+            id: "trb8a36aadb0f911776aa9392720faca16",
+            idFingerprint: 0,
+            metadata: Object,
+            orderId: "1594311077940",
+            paymentType: "CB",
+            result: {
+                status: "CANCELLED", threeDSecureStatus: null, paymentErrorStatus: "",
+            },
+            ttl: "PT10M",
+            type: "RECURRING",
+            url: "http://sandbox.paygreen.fr/payment/execute/trb8a36aadb0f911776aa9392720faca16",
+            valueAt: "2020-07-09T18:11:18+02:00",
+        },
+        message: "",
+        success: true,
+    },
 }
 ```
