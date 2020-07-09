@@ -7,66 +7,51 @@ import { IApiResponse } from '../src/interfaces';
 const sdk = new Sdk(localConfig);
 
 test('It returns all payment types available', () => {
-    return sdk.paymentType
-        .getPaymentType()
-        .then((response) => {
-            const { dataInfo } = response;
+    return sdk.paymentType.getPaymentType().then((response) => {
+        const { dataInfo } = response;
 
-            checkRightResponse(response);
-            dataInfo.data.forEach((e) => {
-                expect(e).toHaveProperty('currency'),
-                    expect(e).toHaveProperty('paymentType'),
-                    expect(e).toHaveProperty('availablePaymentMode');
-            });
-        })
-        .catch((error) => console.log(error));
+        checkRightResponse(response);
+        dataInfo.data.forEach((e) => {
+            expect(e).toHaveProperty('currency'),
+                expect(e).toHaveProperty('paymentType'),
+                expect(e).toHaveProperty('availablePaymentMode');
+        });
+    });
 });
 
 test('It returns all payment types available for paymentype equal to TRD', () => {
-    return sdk.paymentType
-        .getPaymentType('TRD')
-        .then((response) => {
-            const { dataInfo } = response;
+    return sdk.paymentType.getPaymentType('TRD').then((response) => {
+        const { dataInfo } = response;
 
-            checkRightResponse(response);
-            dataInfo.data.forEach((e) => {
-                expect(e).toHaveProperty('currency'),
-                    expect(e).toHaveProperty('paymentType'),
-                    expect(e.paymentType).toBe('TRD'),
-                    expect(e).toHaveProperty('availablePaymentMode'),
-                    expect(e.availablePaymentMode).toContain('CASH');
-            });
-        })
-        .catch((error) => console.log(error));
+        checkRightResponse(response);
+        dataInfo.data.forEach((e) => {
+            expect(e).toHaveProperty('currency'),
+                expect(e).toHaveProperty('paymentType'),
+                expect(e.paymentType).toBe('TRD'),
+                expect(e).toHaveProperty('availablePaymentMode'),
+                expect(e.availablePaymentMode).toContain('CASH');
+        });
+    });
 });
 
 test('It returns all payment types available for currency equal to EUR', () => {
-    return sdk.paymentType
-        .getPaymentType(undefined, 'EUR')
-        .then((response) => {
-            const { dataInfo } = response;
+    return sdk.paymentType.getPaymentType(undefined, 'EUR').then((response) => {
+        const { dataInfo } = response;
 
-            checkRightResponse(response);
-            dataInfo.data.forEach((e) => {
-                expect(e).toHaveProperty('currency'),
-                    expect(e.currency).toBe('EUR'),
-                    expect(e).toHaveProperty('paymentType'),
-                    expect(e).toHaveProperty('availablePaymentMode');
-            });
-        })
-        .catch((error) => console.log(error));
+        checkRightResponse(response);
+        dataInfo.data.forEach((e) => {
+            expect(e).toHaveProperty('currency'),
+                expect(e.currency).toBe('EUR'),
+                expect(e).toHaveProperty('paymentType'),
+                expect(e).toHaveProperty('availablePaymentMode');
+        });
+    });
 });
 
 test('It causes an error because of unavailable currency', () => {
-    return sdk.paymentType
-        .getPaymentType(undefined, 'USD')
-        .then((response) => {
-            checkWrongResponse(response);
-            expect(ApiResponse.getErrorMessage(response)).toBe(
-                'Could not find row 243, USD',
-            );
-        })
-        .catch((error) => console.log(error));
+    return sdk.paymentType.getPaymentType(undefined, 'USD').then((response) => {
+        checkWrongResponse(response);
+    });
 });
 
 /** CHECK RIGHT RESPONSE |
