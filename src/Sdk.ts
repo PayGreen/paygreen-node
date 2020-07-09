@@ -1,13 +1,15 @@
 import { IConfig, IIdentity } from './interfaces';
 import { Host, Mode } from './enums';
-import { Transaction } from './resources';
+import { PaymentType, Transaction } from './resources';
 
 /**
  * The Sdk Main Class to make APIPayGreen Calls.
  * @property {Transaction} transaction - A class to use transactions related requests
+ * @property {PaymentType} paymentType - A class to use requests related to payment types
  */
 export class Sdk {
     public transaction: Transaction;
+    public paymentType: PaymentType;
 
     private _identity: IIdentity = {
         shopId: '',
@@ -42,6 +44,7 @@ export class Sdk {
             this._host = Host[Mode[Mode.PROD]];
         }
         this.transaction = new Transaction(this._identity, this._host);
+        this.paymentType = new PaymentType(this._identity, this._host);
     }
 
     // GETTERS AND SETTERS FOR PRIVATE PROPERTIES

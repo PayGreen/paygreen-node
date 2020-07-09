@@ -18,6 +18,7 @@
     },
     "scripts": {
         "test": "jest --detectOpenHandles --colors",
+        "test-coverage": "jest --collect-coverage",
         "type-check": "tsc --noEmit",
         "type-check:watch": "npm run type-check -- --watch",
         "build": "npm run build:types && npm run build:js",

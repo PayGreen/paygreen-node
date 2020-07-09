@@ -415,7 +415,8 @@ const checkRightResponse = (response: IApiResponse) => {
     expect(success).toBe(true),
         expect(ApiResponse.isSuccessful(response)).toBe(true),
         expect(dataInfo.success).toEqual(true),
-        expect(dataInfo.code).toEqual(0);
+        expect(dataInfo.code).toEqual(0),
+        expect(ApiResponse.getErrorMessage(response)).toBe('no error');
 };
 
 /** CHECK WRONG RESPONSE |

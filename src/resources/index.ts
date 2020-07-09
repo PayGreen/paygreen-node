@@ -1,3 +1,4 @@
+import { PaymentType } from './PaymentType';
 import { Transaction } from './Transaction';
 
-export { Transaction };
+export { PaymentType, Transaction };
