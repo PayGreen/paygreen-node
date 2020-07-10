@@ -230,3 +230,24 @@ All types of Transaction are created the same way:
     },
 }
 ```
+
+## In case of errors
+
+When an error append during requests, the response can takes several form depending on where the error happened:
+
+- If the error occur during request processing, the dataInfo object will be empty or contains a HTML error page.
+- If the error occur during server-side processing, the DataInfo object will contain the error code in the `code` field, the error message in the `message` field, the `success` field will be equal to false and the `data` object will be null.
+
+```JSON
+{
+    success: true,                              // If API is successful
+    status: 200,                                // status code of the response
+    message: 'OK',                              // statusText of the response
+    dataInfo: {                                 // body of the response
+        code: 1,                                // Return code of the API
+        data: null,                             // Object returned by the API
+        message: "Field orderId is required",   // Error message of the server
+        success: false,                         // If server-side errors happened
+    },
+}
+```
