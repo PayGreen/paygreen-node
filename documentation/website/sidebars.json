@@ -1,0 +1,9 @@
+{
+    "docs-other": {
+        "First Api Requests": ["start-sdk"],
+        "Transaction": ["create-transaction", "handle-transaction"],
+        "Data Models": ["transaction-data", "buyer-data", "orderdetails-data"],
+        "Payment types": ["get-paymenttype"],
+        "Tools": ["tools"]
+    }
+}
