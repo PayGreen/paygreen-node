@@ -1,5 +1,6 @@
 import { MainBuilder } from '../MainBuilder';
 import { Transaction as TransactionModel } from '../models';
+import { TransactionType } from '../enums';
 import { serialize } from 'typescript-json-serializer';
 import { IApiResponse } from '../interfaces';
 
@@ -9,6 +10,41 @@ import { IApiResponse } from '../interfaces';
  */
 export class Transaction extends MainBuilder {
     static url: string = '/payins/transaction';
+
+    /**
+     * CREATE | POST /api/{identifiant}/payins/transaction/{cash|subscription|xtime|tokenize}
+     * This type of transaction is used for cash payments
+     * @param {TransactionModel} newTransaction - A Transaction object containing all new transaction informations
+     * @param {TransactionType} type - The type of transaction
+     * @returns {Promise.<IApiResponse>} - An object with the new transaction created
+     */
+    create = (
+        newTransaction: TransactionModel,
+        type: TransactionType,
+    ): Promise<IApiResponse> => {
+        let urlExtension: string = '/';
+        if (Object.values(TransactionType).includes(type)) {
+            urlExtension += type;
+        } else {
+            throw new Error('Given type not available!');
+        }
+
+        const serializedTransaction = serialize(newTransaction);
+        return this.axiosRequest
+            .post(
+                this.buildUrl(Transaction.url) + urlExtension,
+                serializedTransaction,
+            )
+            .then((res) => {
+                return this.ApiResponse.formatResponse(
+                    true,
+                    res.status,
+                    res.statusText,
+                    res.data,
+                );
+            })
+            .catch(this.ApiResponse.formatError);
+    };
 
     /**
      * CREATE CASH | POST /api/{identifiant}/payins/transaction/cash
@@ -247,7 +283,7 @@ export class Transaction extends MainBuilder {
         amount?: number,
     ): Promise<IApiResponse> => {
         const urlExtension: string = '/' + transactionId;
-        
+
         const data = {};
         if (amount) {
             data['amount'] = amount;

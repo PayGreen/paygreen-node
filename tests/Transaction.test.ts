@@ -2,7 +2,7 @@ require('dotenv').config('/.env');
 const { localConfig } = require('./config/localConfig');
 import { Sdk } from '../src';
 import { Buyer, OrderDetails, Transaction, ApiResponse } from '../src/models';
-import { Country } from '../src/enums';
+import { Country, TransactionType } from '../src/enums';
 import { IApiResponse } from '../src/interfaces';
 
 const sdk = new Sdk(localConfig);
@@ -33,7 +33,7 @@ test('It returns the created cash transaction', () => {
     newTransaction.ttl = 'PT1M';
 
     return sdk.transaction
-        .createCash(newTransaction)
+        .create(newTransaction, TransactionType.cash)
         .then((response: IApiResponse) => {
             const { dataInfo } = response;
 
@@ -59,6 +59,9 @@ test('It returns the created cash transaction', () => {
                     'metadata',
                     newTransaction.metadata,
                 );
+        })
+        .catch((err) => {
+            throw new Error(err);
         });
 });
 
@@ -69,12 +72,15 @@ test('It causes an error during cash transaction', () => {
     newTransaction.currency = 'EUR';
 
     return sdk.transaction
-        .createCash(newTransaction)
+        .create(newTransaction, TransactionType.cash)
         .then((response: IApiResponse) => {
             checkWrongResponse(response);
             expect(ApiResponse.getErrorMessage(response)).toBe(
                 "Field 'orderId' required",
             );
+        })
+        .catch((err) => {
+            throw new Error(err);
         });
 });
 
@@ -94,7 +100,7 @@ test('It returns the created subscription transaction', () => {
     newTransaction.ttl = 'PT1M';
 
     return sdk.transaction
-        .createSubscription(newTransaction)
+        .create(newTransaction, TransactionType.recurring)
         .then((response: IApiResponse) => {
             const { dataInfo } = response;
 
@@ -120,6 +126,9 @@ test('It returns the created subscription transaction', () => {
                     'metadata',
                     newTransaction.metadata,
                 );
+        })
+        .catch((err) => {
+            throw new Error(err);
         });
 });
 
@@ -130,12 +139,15 @@ test('It causes an error during subscription transaction', () => {
     newTransaction.currency = 'EUR';
 
     return sdk.transaction
-        .createSubscription(newTransaction)
+        .create(newTransaction, TransactionType.recurring)
         .then((response: IApiResponse) => {
             checkWrongResponse(response);
             expect(ApiResponse.getErrorMessage(response)).toBe(
                 "Field 'orderId' required",
             );
+        })
+        .catch((err) => {
+            throw new Error(err);
         });
 });
 
@@ -155,7 +167,7 @@ test('It returns the created xTime transaction', () => {
     newTransaction.ttl = 'PT1M';
 
     return sdk.transaction
-        .createXTime(newTransaction)
+        .create(newTransaction, TransactionType.xtime)
         .then((response: IApiResponse) => {
             const { dataInfo } = response;
 
@@ -181,6 +193,9 @@ test('It returns the created xTime transaction', () => {
                     'metadata',
                     newTransaction.metadata,
                 );
+        })
+        .catch((err) => {
+            throw new Error(err);
         });
 });
 
@@ -191,12 +206,15 @@ test('It causes an error during xTime transaction', () => {
     newTransaction.currency = 'EUR';
 
     return sdk.transaction
-        .createXTime(newTransaction)
+        .create(newTransaction, TransactionType.xtime)
         .then((response: IApiResponse) => {
             checkWrongResponse(response);
             expect(ApiResponse.getErrorMessage(response)).toBe(
                 "Field 'orderId' required",
             );
+        })
+        .catch((err) => {
+            throw new Error(err);
         });
 });
 
@@ -215,7 +233,7 @@ test('It returns the created tokenize transaction', () => {
     newTransaction.ttl = 'PT1M';
 
     return sdk.transaction
-        .createTokenize(newTransaction)
+        .create(newTransaction, TransactionType.tokenize)
         .then((response: IApiResponse) => {
             const { dataInfo } = response;
 
@@ -241,6 +259,9 @@ test('It returns the created tokenize transaction', () => {
                     'metadata',
                     newTransaction.metadata,
                 );
+        })
+        .catch((err) => {
+            throw new Error(err);
         });
 });
 
@@ -251,12 +272,15 @@ test('It causes an error during tokenize transaction', () => {
     newTransaction.currency = 'EUR';
 
     return sdk.transaction
-        .createTokenize(newTransaction)
+        .create(newTransaction, TransactionType.tokenize)
         .then((response: IApiResponse) => {
             checkWrongResponse(response);
             expect(ApiResponse.getErrorMessage(response)).toBe(
                 "Field 'orderId' required",
             );
+        })
+        .catch((err) => {
+            throw new Error(err);
         });
 });
 
@@ -276,9 +300,12 @@ test('It returns the details of the transaction', () => {
 
     var transactionId: string = '';
     sdk.transaction
-        .createCash(newTransaction)
+        .create(newTransaction, TransactionType.cash)
         .then((response: IApiResponse) => {
             transactionId = response.dataInfo.data.id;
+        })
+        .catch((err) => {
+            throw new Error(err);
         })
         .finally(() => {
             sdk.transaction
@@ -288,6 +315,9 @@ test('It returns the details of the transaction', () => {
                     const { dataInfo } = response;
 
                     expect(dataInfo.data).toHaveProperty('id', transactionId);
+                })
+                .catch((err) => {
+                    throw new Error(err);
                 });
         });
 });
@@ -297,6 +327,9 @@ test('It causes an error during getDetails method', () => {
         .getDetails('aaaaaaaaaa')
         .then((response: IApiResponse) => {
             checkWrongResponse(response);
+        })
+        .catch((err) => {
+            throw new Error(err);
         });
 });
 
@@ -316,9 +349,12 @@ test('It cancels a cash transaction', () => {
 
     var transactionId: string = '';
     sdk.transaction
-        .createCash(newTransaction)
+        .create(newTransaction, TransactionType.cash)
         .then((response: IApiResponse) => {
             transactionId = response.dataInfo.data.id;
+        })
+        .catch((err) => {
+            throw new Error(err);
         })
         .finally(() => {
             sdk.transaction
@@ -329,6 +365,9 @@ test('It cancels a cash transaction', () => {
                     const { dataInfo } = response;
                     expect(dataInfo.data.result.status).toBe('CANCELLED');
                 })
+                .catch((err) => {
+                    throw new Error(err);
+                })
                 .finally(() => {
                     sdk.transaction
                         .getDetails(transactionId)
@@ -337,15 +376,23 @@ test('It cancels a cash transaction', () => {
                             expect(dataInfo.data.result.status).toBe(
                                 'CANCELLED',
                             );
+                        })
+                        .catch((err) => {
+                            throw new Error(err);
                         });
                 });
         });
 });
 
 test('It causes error during cancellation', () => {
-    sdk.transaction.cancel('aaaaaaaaaa').then((response: IApiResponse) => {
-        checkWrongResponse(response);
-    });
+    sdk.transaction
+        .cancel('aaaaaaaaaa')
+        .then((response: IApiResponse) => {
+            checkWrongResponse(response);
+        })
+        .catch((err) => {
+            throw new Error(err);
+        });
 });
 
 test('It returns the transaction with the modified amount ', () => {
@@ -364,9 +411,12 @@ test('It returns the transaction with the modified amount ', () => {
 
     var transactionId: string = '';
     return sdk.transaction
-        .createCash(newTransaction)
+        .create(newTransaction, TransactionType.cash)
         .then((response: IApiResponse) => {
             transactionId = response.dataInfo.data.id;
+        })
+        .catch((err) => {
+            throw new Error(err);
         })
         .finally(() => {
             sdk.transaction
@@ -377,6 +427,9 @@ test('It returns the transaction with the modified amount ', () => {
 
                     expect(dataInfo.data).toHaveProperty('amount', 9000);
                 })
+                .catch((err) => {
+                    throw new Error(err);
+                })
                 .finally(() => {
                     sdk.transaction
                         .getDetails(transactionId)
@@ -385,6 +438,9 @@ test('It returns the transaction with the modified amount ', () => {
                                 'amount',
                                 9000,
                             );
+                        })
+                        .catch((err) => {
+                            throw new Error(err);
                         });
                 });
         });
@@ -395,6 +451,9 @@ test('It causes an error during modification of unknow transaction', () => {
         .modify('aaaaaaaaaa', 9000)
         .then((response: IApiResponse) => {
             checkWrongResponse(response);
+        })
+        .catch((err) => {
+            throw new Error(err);
         });
 });
 
@@ -403,6 +462,9 @@ test('It causes an error during confirmation of unknow transaction', () => {
         .confirm('aaaaaaaaaa', 9000, 'Transaction validé !')
         .then((response: IApiResponse) => {
             checkWrongResponse(response);
+        })
+        .catch((err) => {
+            throw new Error(err);
         });
 });
 
@@ -422,15 +484,21 @@ test('It returns the refunded transaction details', () => {
 
     var transactionId: string = '';
     return sdk.transaction
-        .createCash(newTransaction)
+        .create(newTransaction, TransactionType.cash)
         .then((response: IApiResponse) => {
             transactionId = response.dataInfo.data.id;
+        })
+        .catch((err) => {
+            throw new Error(err);
         })
         .finally(() => {
             sdk.transaction
                 .refund(transactionId)
                 .then((response) => {
                     checkRightResponse(response);
+                })
+                .catch((err) => {
+                    throw new Error(err);
                 })
                 .finally(() => {
                     sdk.transaction
@@ -445,16 +513,24 @@ test('It returns the refunded transaction details', () => {
                                 expect(dataInfo.data.result.status).toBe(
                                     'REFUNDED',
                                 );
+                        })
+                        .catch((err) => {
+                            throw new Error(err);
                         });
                 });
         });
 });
 
 test('It causes an error during refund of unknow transaction', () => {
-    return sdk.transaction.refund('aaaaaaaaaa').then((response) => {
-        checkWrongResponse(response);
-        expect(ApiResponse.getErrorMessage(response)).toBe('Not Found');
-    });
+    return sdk.transaction
+        .refund('aaaaaaaaaa')
+        .then((response) => {
+            checkWrongResponse(response);
+            expect(ApiResponse.getErrorMessage(response)).toBe('Not Found');
+        })
+        .catch((err) => {
+            throw new Error(err);
+        });
 });
 
 /** CHECK RIGHT RESPONSE |
