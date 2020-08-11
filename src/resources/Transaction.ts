@@ -13,9 +13,8 @@ export class Transaction extends MainBuilder {
 
     /**
      * CREATE | POST /api/{identifiant}/payins/transaction/{cash|subscription|xtime|tokenize}
-     * This type of transaction is used for cash payments
      * @param {TransactionModel} newTransaction - A Transaction object containing all new transaction informations
-     * @param {TransactionType} type - The type of transaction
+     * @param {TransactionType} type - The type of the transaction
      * @returns {Promise.<IApiResponse>} - An object with the new transaction created
      */
     create = (
@@ -26,118 +25,12 @@ export class Transaction extends MainBuilder {
         if (Object.values(TransactionType).includes(type)) {
             urlExtension += type;
         } else {
-            throw new Error('Given type not available!');
+            throw new Error(
+                'Given type not available! Please, use the Enum TransactionType to provide the type of the transaction.',
+            );
         }
 
         const serializedTransaction = serialize(newTransaction);
-        return this.axiosRequest
-            .post(
-                this.buildUrl(Transaction.url) + urlExtension,
-                serializedTransaction,
-            )
-            .then((res) => {
-                return this.ApiResponse.formatResponse(
-                    true,
-                    res.status,
-                    res.statusText,
-                    res.data,
-                );
-            })
-            .catch(this.ApiResponse.formatError);
-    };
-
-    /**
-     * CREATE CASH | POST /api/{identifiant}/payins/transaction/cash
-     * This type of transaction is used for cash payments
-     * @param {TransactionModel} newTransaction - A Transaction object containing all new transaction informations
-     * @returns {Promise.<IApiResponse>} - An object with the new transaction created
-     */
-    createCash = (newTransaction: TransactionModel): Promise<IApiResponse> => {
-        const urlExtension: string = '/cash';
-        const serializedTransaction = serialize(newTransaction);
-
-        return this.axiosRequest
-            .post(
-                this.buildUrl(Transaction.url) + urlExtension,
-                serializedTransaction,
-            )
-            .then((res) => {
-                return this.ApiResponse.formatResponse(
-                    true,
-                    res.status,
-                    res.statusText,
-                    res.data,
-                );
-            })
-            .catch(this.ApiResponse.formatError);
-    };
-
-    /**
-     * CREATE SUBSCRIPTION | POST /api/{identifiant}/payins/transaction/subscription
-     * This type of transaction is used for payments of subscription
-     * @param {TransactionModel} newTransaction - A Transaction object containing all new transaction informations
-     * @returns {Promise.<IApiResponse>} - An object with the new transaction created
-     */
-    createSubscription = (
-        newTransaction: TransactionModel,
-    ): Promise<IApiResponse> => {
-        const urlExtension: string = '/subscription';
-        const serializedTransaction = serialize(newTransaction);
-
-        return this.axiosRequest
-            .post(
-                this.buildUrl(Transaction.url) + urlExtension,
-                serializedTransaction,
-            )
-            .then((res) => {
-                return this.ApiResponse.formatResponse(
-                    true,
-                    res.status,
-                    res.statusText,
-                    res.data,
-                );
-            })
-            .catch(this.ApiResponse.formatError);
-    };
-
-    /**
-     * CREATE XTIME | POST /api/{identifiant}/payins/transaction/xtime
-     * This type of transaction is used for payments by instalment
-     * @param {TransactionModel} newTransaction - A Transaction object containing all new transaction informations
-     * @returns {Promise.<IApiResponse>} - An object with the new transaction created
-     */
-    createXTime = (newTransaction: TransactionModel): Promise<IApiResponse> => {
-        const urlExtension: string = '/xtime';
-        const serializedTransaction = serialize(newTransaction);
-
-        return this.axiosRequest
-            .post(
-                this.buildUrl(Transaction.url) + urlExtension,
-                serializedTransaction,
-            )
-            .then((res) => {
-                return this.ApiResponse.formatResponse(
-                    true,
-                    res.status,
-                    res.statusText,
-                    res.data,
-                );
-            })
-            .catch(this.ApiResponse.formatError);
-    };
-
-    /**
-     * CREATE TOKENIZE | POST /api/{identifiant}/payins/transaction/tokenize
-     * This type of transaction is used for payments on delivery
-     * @param {TransactionModel} newTransaction - A Transaction object containing all new transaction informations
-     * @returns {Promise.<IApiResponse>} - An object with the new transaction created
-     */
-    createTokenize = (
-        newTransaction: TransactionModel,
-    ): Promise<IApiResponse> => {
-        const urlExtension: string = '/tokenize';
-        const serializedTransaction = serialize(newTransaction);
-
         return this.axiosRequest
             .post(
                 this.buildUrl(Transaction.url) + urlExtension,
