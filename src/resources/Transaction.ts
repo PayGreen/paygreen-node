@@ -60,6 +60,7 @@ export class Transaction extends MainBuilder {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                data: null,
             })
             .then((res) => {
                 return this.ApiResponse.formatResponse(
