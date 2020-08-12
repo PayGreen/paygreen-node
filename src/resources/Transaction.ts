@@ -22,8 +22,8 @@ export class Transaction extends MainBuilder {
         type: TransactionType,
     ): Promise<IApiResponse> => {
         let urlExtension: string = '/';
-        if (Object.values(TransactionType).includes(type)) {
-            urlExtension += type;
+        if (type in TransactionType) {
+            urlExtension += TransactionType[type];
         } else {
             throw new Error(
                 'Given type not available! Please, use the Enum TransactionType to provide the type of the transaction.',

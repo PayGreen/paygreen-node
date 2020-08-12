@@ -100,7 +100,7 @@ test('It returns the created subscription transaction', () => {
     newTransaction.ttl = 'PT1M';
 
     return sdk.transaction
-        .create(newTransaction, TransactionType.recurring)
+        .create(newTransaction, TransactionType.subscription)
         .then((response: IApiResponse) => {
             const { dataInfo } = response;
 
@@ -139,7 +139,7 @@ test('It causes an error during subscription transaction', () => {
     newTransaction.currency = 'EUR';
 
     return sdk.transaction
-        .create(newTransaction, TransactionType.recurring)
+        .create(newTransaction, TransactionType.subscription)
         .then((response: IApiResponse) => {
             checkWrongResponse(response);
             expect(ApiResponse.getErrorMessage(response)).toBe(
