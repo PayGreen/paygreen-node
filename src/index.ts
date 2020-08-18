@@ -1,5 +1,5 @@
 import { Sdk } from './Sdk';
-import { Country, Host, Mode } from './enums';
+import { Country, Host, Mode, TransactionType } from './enums';
 import { IApiResponse } from './interfaces';
 import { ApiResponse, Buyer, OrderDetails, Tools, Transaction } from './models';
 
@@ -14,4 +14,5 @@ export {
     Sdk,
     Tools,
     Transaction,
+    TransactionType,
 };

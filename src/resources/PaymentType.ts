@@ -33,6 +33,7 @@ export class PaymentType extends MainBuilder {
                 params: {
                     ...data,
                 },
+                data: null,
             })
             .then((res) => {
                 return this.ApiResponse.formatResponse(
