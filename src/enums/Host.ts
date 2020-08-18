@@ -2,7 +2,7 @@
  * @description - An enumeration of available default hosts
  */
 export enum Host {
-    'DEV' = 'http://sandbox.paygreen.fr',
-    'PREPROD' = 'http://sandbox.paygreen.fr',
-    'PROD' = 'http://paygreen.fr',
+    'DEV' = 'https://sandbox.paygreen.fr',
+    'PREPROD' = 'https://sandbox.paygreen.fr',
+    'PROD' = 'https://paygreen.fr',
 }
