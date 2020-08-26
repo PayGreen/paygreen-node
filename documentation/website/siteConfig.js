@@ -23,8 +23,8 @@
 const siteConfig = {
     title: 'PAYGREEN NODE', // Title for your website.
     tagline: 'Our ease-to-use Node SDK for API PayGreen',
-    url: 'https://your-docusaurus-test-site.com', // Your website URL
-    baseUrl: '/', // Base URL for your project */
+    url: 'https://paygreen.github.io', // Your website URL
+    baseUrl: '/paygreen-node/', // Base URL for your project */
     // For github.io type URLs, you would set the url and baseUrl like:
     //   url: 'https://facebook.github.io',
     //   baseUrl: '/test-site/',

@@ -1,0 +1,31 @@
+name: Publish Documentation
+
+on:
+    push:
+        tags:
+            - '*'
+
+jobs:
+  publish-doc:
+        runs-on: ubuntu-latest
+        env:
+          working-directory: documentation/website
+        steps:
+          - uses: actions/checkout@v1
+          - uses: actions/setup-node@v1
+            with:
+                node-version: 12.16.3
+                registry-url: https://registry.npmjs.org/
+          - uses: shimataro/ssh-key-action@v2
+            with:
+              key: ${{ secrets.PRIVATE_SSH }}
+              known_hosts: ${{ secrets.KNOWN_HOSTS }}
+              name: id_rsa
+          - run : npm install
+            working-directory: ${{env.working-directory}}
+          - run : git config --global user.email "tech@paygreen.fr"
+          - run : git config --global user.name "Paygreen Bot"
+          - run : npm run build
+            working-directory: ${{env.working-directory}}
+          - run : USE_SSH=true npm run publish-gh-pages
+            working-directory: ${{env.working-directory}}
