@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Handle a transaction · PAYGREEN NODE</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Here you will have all informations to manage your transactions."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Handle a transaction · PAYGREEN NODE"/><meta property="og:type" content="website"/><meta property="og:url" content="https://paygreen.github.io/paygreen-nodeindex"/><meta property="og:description" content="Here you will have all informations to manage your transactions."/><meta property="og:image" content="https://paygreen.github.io/paygreen-node/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://paygreen.github.io/paygreen-node/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/paygreen-nodeimg/e-transparent-disque-vert.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&amp;display=swap"/><link rel="stylesheet" href="https://buttons.github.io/buttons.js"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/paygreen-nodejs/scrollSpy.js"></script><link rel="stylesheet" href="/paygreen-nodecss/prism.css"/><link rel="stylesheet" href="/paygreen-nodecss/main.css"/><script src="/paygreen-nodejs/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/paygreen-node"><img class="logo" src="/paygreen-nodeimg/e-transparent-disque-blanc.ico" alt="PAYGREEN NODE"/><h2 class="headerTitleWithLogo">PAYGREEN NODE</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/paygreen-node#try" target="_self">Getting Started</a></li><li class="siteNavGroupActive"><a href="/paygreen-nodedocs/start-sdk" target="_self">Docs</a></li><li class=""><a href="#" target="_self">Github</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Transaction</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">First Api Requests</h3><ul class=""><li class="navListItem"><a class="navItem" href="/paygreen-nodedocs/start-sdk">Import SDK</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Transaction</h3><ul class=""><li class="navListItem"><a class="navItem" href="/paygreen-nodedocs/create-transaction">Create a transaction</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/paygreen-nodedocs/handle-transaction">Handle a transaction</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Data Models</h3><ul class=""><li class="navListItem"><a class="navItem" href="/paygreen-nodedocs/transaction-data">Transaction</a></li><li class="navListItem"><a class="navItem" href="/paygreen-nodedocs/buyer-data">Buyer</a></li><li class="navListItem"><a class="navItem" href="/paygreen-nodedocs/orderdetails-data">Order details</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Payment types</h3><ul class=""><li class="navListItem"><a class="navItem" href="/paygreen-nodedocs/get-paymenttype">Know the payment types availables</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tools</h3><ul class=""><li class="navListItem"><a class="navItem" href="/paygreen-nodedocs/tools">Helpful methods for handling API Requests &amp; Responses</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Handle a transaction</h1></header><article><div><span><p>Here you will have all informations to manage your transactions.</p>
+<h2><a class="anchor" aria-hidden="true" id="getdetails"></a><a href="#getdetails" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getDetails()</h2>
+<table>
+<thead>
+<tr><th>Param</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>transactionId</td><td><code>string</code></td><td>(Required) The unique id of the transation</td></tr>
+</tbody>
+</table>
+<ul>
+<li>Return a Promise with an object containing the transaction details.</li>
+</ul>
+<pre><code class="hljs css language-Javascript">    <span class="hljs-keyword">return</span> sdk.transaction
+        .getDetails(transactionId)
+        .then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+            <span class="hljs-built_in">console</span>.log(res)
+        });
+</code></pre>
+<ul>
+<li>API Response
+The \dataInfo object inside API response contains a \data object with the transaction details.</li>
+</ul>
+<pre><code class="hljs css language-JSON">{
+    success: true,
+    status: 200,
+    message: "OK",
+    dataInfo: {
+        code: 0,
+        data: {
+            id: "tr9558da6e3ed2332289a764f1a754b8c9",
+            orderId: "oid5762",
+            amount: 1450,
+            currency: "EUR",
+            type: "RECURRING",
+            paymentType: "CB",
+            url:
+            "http://sandbox.paygreen.fr/payment/execute/tr9558da6e3ed2332289a764f1a754b8c9",
+            result: {
+                paymentErrorStatus: "",
+                status: "PENDING",
+                threeDSecureStatus: "3DS_SUCCESSED",
+            },
+            card: Object,
+            buyer: Buyer,
+            orderDetails: OrderDetails,
+            metadata: Object,
+            eligibleAmount: Object,
+            idFingerprint: 0,
+            createdAt: "2020-07-09T17:46:01+02:00",
+            valueAt: "2020-07-09T17:46:01+02:00",
+            answeredAt: 0,
+            ttl: "PT10M",
+        },
+        message: "",
+        success: true,
+    },
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="modify"></a><a href="#modify" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>modify()</h2>
+<table>
+<thead>
+<tr><th>Param</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>transactionId</td><td><code>string</code></td><td>(Required) The unique id of the transation</td></tr>
+<tr><td>newAmount</td><td><code>number</code></td><td>(Required) The new amount of the transaction</td></tr>
+</tbody>
+</table>
+<ul>
+<li>Return a Promise with an object containing the modified transaction details.</li>
+</ul>
+<pre><code class="hljs css language-Javascript">    <span class="hljs-keyword">return</span> sdk.transaction
+        .modify(transactionId, <span class="hljs-number">1000</span>)
+        .then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+            <span class="hljs-built_in">console</span>.log(res)
+        });
+</code></pre>
+<ul>
+<li>API Response
+The \dataInfo object inside API response contains a \data object with the transaction details.</li>
+</ul>
+<pre><code class="hljs css language-JSON">{
+    success: true,
+    status: 200,
+    message: 'OK',
+    dataInfo: {
+        code: 0
+        data:
+            amount: 1000,
+            answeredAt: 0,
+            buyer: Buyer,
+            orderDetails: OrderDetails,
+            card: Object,
+            createdAt: "2020-07-09T17:55:11+02:00",
+            currency: "EUR",
+            eligibleAmount: Object,
+            id: "trc8814d2556090b12ea0d8b50bba5afda",
+            idFingerprint: 0,
+            metadata: Object,
+            orderId: "1594310111784",
+            paymentType: "CB",
+            result: {
+                paymentErrorStatus: "",
+                status: "PENDING",
+                threeDSecureStatus: "3DS_SUCCESSED",
+            },
+            ttl: "PT10M",
+            type: "RECURRING",
+            url: "http://sandbox.paygreen.fr/payment/execute/trc8814d2556090b12ea0d8b50bba5afda",
+            valueAt: "2020-07-09T17:55:11+02:00",
+        },
+        message: "",
+        success: true,
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="refund"></a><a href="#refund" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>refund()</h2>
+<table>
+<thead>
+<tr><th>Param</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>transactionId</td><td><code>string</code></td><td>(Required) The unique id of the transation</td></tr>
+<tr><td>amount</td><td><code>number</code></td><td>(Optional) The amount refunded in EUR cents, if undefined the transaction is fully refunded</td></tr>
+</tbody>
+</table>
+<ul>
+<li>Return a Promise with an object containing the refunded transaction details.</li>
+</ul>
+<pre><code class="hljs css language-Javascript">    <span class="hljs-keyword">return</span> sdk.transaction
+        .refund(transactionId, <span class="hljs-number">1000</span>)
+        .then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+            <span class="hljs-built_in">console</span>.log(res)
+        });
+</code></pre>
+<ul>
+<li>API Response
+The \dataInfo object inside API response contains a \data object with the refunded transaction details.</li>
+</ul>
+<pre><code class="hljs css language-JSON">{
+    success: true,
+    status: 200,
+    message: 'OK',
+    dataInfo: {
+        code: 0,
+        data: {
+            amount: 1000,
+            answeredAt: "2020-07-09T17:59:24+02:00",
+            buyer: Buyer,
+            orderDetails: OrderDetails,
+            card: Object,
+            createdAt: "2020-07-09T17:55:11+02:00",
+            currency: "EUR",
+            eligibleAmount: Object,
+            id: "trc8814d2556090b12ea0d8b50bba5afda",
+            idFingerprint: 0,
+            metadata: Object,
+            orderId: "1594310111784",
+            paymentType: "CB",
+            result: {
+                paymentErrorStatus: "",
+                status: "REFUNDED",
+                threeDSecureStatus: "3DS_SUCCESSED",
+            },
+            ttl: "0",
+            type: "RECURRING",
+            url: "http://sandbox.paygreen.fr/payment/execute/trc8814d2556090b12ea0d8b50bba5afda",
+            valueAt: "2020-07-09T17:59:24+02:00",
+        }
+        message: "",
+        success: true,
+    },
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="confirm"></a><a href="#confirm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>confirm()</h2>
+<table>
+<thead>
+<tr><th>Param</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>transactionId</td><td><code>string</code></td><td>(Required) The unique id of the transation</td></tr>
+<tr><td>amount</td><td><code>number</code></td><td>(Required) The amount of the transaction</td></tr>
+<tr><td>message</td><td><code>string</code></td><td>(Required) The validation message</td></tr>
+</tbody>
+</table>
+<ul>
+<li>Return a Promise with an object containing the confirmed transaction details.</li>
+</ul>
+<pre><code class="hljs css language-Javascript">    <span class="hljs-keyword">return</span> sdk.transaction
+        .confirm(transactionId, <span class="hljs-number">1450</span>, <span class="hljs-string">'Transaction confirmed!'</span>)
+        .then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+            <span class="hljs-built_in">console</span>.log(res)
+        });
+</code></pre>
+<ul>
+<li>API Response
+The \dataInfo object inside API response contains a \data object with the transaction details.</li>
+</ul>
+<pre><code class="hljs css language-JSON">{
+    success: true,
+    status: 200,
+    message: 'OK',
+    dataInfo: {
+        code: 0,
+        data: {
+            amount: 1000,
+            answeredAt: "2020-07-09T17:59:24+02:00",
+            buyer: Buyer,
+            orderDetails: OrderDetails,
+            card: Object,
+            createdAt: "2020-07-09T17:55:11+02:00",
+            currency: "EUR",
+            eligibleAmount: Object,
+            id: "trc8814d2556090b12ea0d8b50bba5afda",
+            idFingerprint: 0,
+            metadata: Object,
+            orderId: "1594310111784",
+            paymentType: "CB",
+            result: {
+                paymentErrorStatus: "",
+                status: "SUCCESSED",
+                threeDSecureStatus: "3DS_SUCCESSED",
+            },
+            ttl: "0",
+            type: "RECURRING",
+            url: "http://sandbox.paygreen.fr/payment/execute/trc8814d2556090b12ea0d8b50bba5afda",
+            valueAt: "2020-07-09T17:59:24+02:00",
+        }
+        message: "",
+        success: true,
+    },
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="cancel"></a><a href="#cancel" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>cancel()</h2>
+<table>
+<thead>
+<tr><th>Param</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>transactionId</td><td><code>string</code></td><td>(Required) The unique id of the transation</td></tr>
+</tbody>
+</table>
+<ul>
+<li>Return a Promise with an object containing the cancelled transaction details.</li>
+</ul>
+<pre><code class="hljs css language-Javascript">    <span class="hljs-keyword">return</span> sdk.transaction
+        .cancel(transactionId)
+        .then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+            <span class="hljs-built_in">console</span>.log(res)
+        });
+</code></pre>
+<ul>
+<li>API Response
+The \dataInfo object inside API response contains a \data object with the transaction details.</li>
+</ul>
+<pre><code class="hljs css language-JSON">{
+    success: true,
+    status: 200,
+    message: 'OK',
+    dataInfo: {
+        code: 0,
+        data: {
+            amount: 1000,
+            answeredAt: 0,
+            buyer: Buyer,
+            orderDetails: OrderDetails,
+            card: Object,
+            createdAt: "2020-07-09T18:11:18+02:00",
+            currency: "EUR",
+            eligibleAmount: Object,
+            id: "trb8a36aadb0f911776aa9392720faca16",
+            idFingerprint: 0,
+            metadata: Object,
+            orderId: "1594311077940",
+            paymentType: "CB",
+            result: {
+                status: "CANCELLED", threeDSecureStatus: null, paymentErrorStatus: "",
+            },
+            ttl: "PT10M",
+            type: "RECURRING",
+            url: "http://sandbox.paygreen.fr/payment/execute/trb8a36aadb0f911776aa9392720faca16",
+            valueAt: "2020-07-09T18:11:18+02:00",
+        },
+        message: "",
+        success: true,
+    },
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="in-case-of-errors"></a><a href="#in-case-of-errors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>In case of errors</h2>
+<p>When an error append during requests, the response can takes several form depending on where the error happened:</p>
+<ul>
+<li>If the error occur during request processing, the dataInfo object will be empty or contains a HTML error page.</li>
+<li>If the error occur during server-side processing, the DataInfo object will contain the error code in the <code>code</code> field, the error message in the <code>message</code> field, the <code>success</code> field will be equal to false and the <code>data</code> object will be null.</li>
+</ul>
+<pre><code class="hljs css language-JSON">{
+    success: false,         // If API is successful
+    status: 404,            // status code of the response
+    message: 'Not Found',   // statusText of the response
+    dataInfo: null,         // body of the response
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/paygreen-nodedocs/create-transaction"><span class="arrow-prev">← </span><span>Create a transaction</span></a><a class="docs-next button" href="/paygreen-nodedocs/transaction-data"><span>Transaction</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#getdetails">getDetails()</a></li><li><a href="#modify">modify()</a></li><li><a href="#refund">refund()</a></li><li><a href="#confirm">confirm()</a></li><li><a href="#cancel">cancel()</a></li><li><a href="#in-case-of-errors">In case of errors</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/paygreen-node" class="nav-home"></a><div><h5>Docs</h5><a href="/paygreen-nodedocs/start-sdk">Set Up the Sdk</a><a href="/paygreen-nodedocs/create-transaction">First API Requests</a></div><div><h5>About Us</h5><a href="https://paygreen.fr/documentation/api-documentation-categorie?cat=paiement" target="_blank" rel="noreferrer noopener">PayGreen API by Paygreen</a><a href="https://www.paygreen.io/" target="_blank" rel="noreferrer noopener">PayGreen</a></div><div><h5>More</h5><a href="#" target="_blank">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/paygreen-nodeimg/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 PayGreen</section></footer></div></body></html>
